@@ -6,6 +6,8 @@
 :ems_refresh:
   :proxmox:
     :refresh_interval: 15.minutes
+    :inventory_object_refresh: true
+    :inventory_object_saving_strategy: :recursive
 :http_proxy:
   :proxmox:
     :host:
