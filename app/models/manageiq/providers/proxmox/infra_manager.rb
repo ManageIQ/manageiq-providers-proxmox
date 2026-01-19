@@ -6,6 +6,7 @@ module ManageIQ::Providers
     supports :provisioning
     supports :refresh_new_target
     supports :refresh_ems
+    supports :reconfigure_disks
 
 
     def self.ems_type
