@@ -195,7 +195,7 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
             :location        => volume_path,
             :size            => size_in_bytes,
             :controller_type => key.to_s.gsub(/\d+\z/, ''),
-            :disk_type       => is_cdrom ? 'cdrom' : 'disk'
+            :disk_type       => is_cdrom ? 'cdrom' : 'disk',
             :mode            => 'persistent'
           )
         end
