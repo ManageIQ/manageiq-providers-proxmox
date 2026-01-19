@@ -189,12 +189,14 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
 
           persister.disks.build(
             :hardware        => hardware,
+            :filename        => key.to_s,
             :storage         => storage_inventory_object,
             :device_name     => key.to_s,
             :location        => volume_path,
             :size            => size_in_bytes,
             :controller_type => key.to_s.gsub(/\d+\z/, ''),
             :disk_type       => is_cdrom ? 'cdrom' : 'disk'
+            :mode            => 'persistent'
           )
         end
       end
