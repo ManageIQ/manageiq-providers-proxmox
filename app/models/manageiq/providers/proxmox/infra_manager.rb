@@ -285,7 +285,7 @@ module ManageIQ::Providers
         _log.info("#{log_header} Disk #{disk_name} resized successfully: #{response.inspect}")
       rescue => err
         _log.error("#{log_header} Error resizing disk #{disk_name}: #{err}")
-        raise MiqException::MiqVmError, "Failed to resize disk #{disk_name: #{err}"
+        raise MiqException::MiqVmError, "Failed to resize disk #{disk_name}"
       end
     end
   end
