@@ -231,6 +231,22 @@ module ManageIQ::Providers
         _log.info("#{log_header} Setting CPU to #{spec['sockets']} sockets × #{spec['cores']} cores")
       end
 
+      disks_to_edit = spec['disksEdit'] || spec['disksResize']
+      if disks_to_edit && disks_to_edit.any?
+        _log.info("#{log_header} Editing disks: #{disks_to_edit.inspect}")
+        edit_vm_disks(connection, node_id, vmid, disks_to_edit, log_header)
+      end
+
+      if spec['disksAdd']
+        _log.info("#{log_header} Adding disks: #{spec['disksAdd'].inspect}")
+        add_vm_disks(connection, node_id, vmid, spec['disksAdd'], log_header)
+      end
+
+      if spec['disksRemove']
+        _log.info("#{log_header} Removing disks: #{spec['disksRemove'].inspect}")
+        remove_vm_disks(connection, node_id, vmid, spec['disksRemove'], log_header)
+      end
+
       unless config_updates.empty?
         _log.info("#{log_header} Applying configuration: #{config_updates.inspect}")
         connection.put("nodes/#{node_id}/qemu/#{vmid}/config", config_updates)
@@ -248,44 +264,39 @@ module ManageIQ::Providers
         raise MiqException::MiqVmError, _("An error occurred while reconfiguring the VM: %{error}") % {:error => err}
     end
 
-    def vm_resize_disk(vm, options = {})
-      log_header = "EMS: [#{name}] #{vm.class.name}: id [#{vm.id}], name [#{vm.name}], ems_ref [#{vm.ems_ref}]"
+  def edit_vm_disks(connection, node_id, vmid, disks_specs, log_header)
+    _log.info("#{log_header} edit_vm_disks: #{disks_specs.inspect}")
+    
+    disks_specs.each do |disk_spec|
+      disk_spec = disk_spec.symbolize_keys
+      disk_name = disk_spec[:disk_name]
+      new_size_mb = disk_spec[:disk_size_in_mb].to_i
+      new_size_gb = (new_size_mb / 1024.0).ceil
       
-      disk_name = options[:disk_name]
-      size_increase_gb = options[:size_increase_gb]
+      _log.info("#{log_header} Resizing disk #{disk_name} to #{new_size_gb}GB")
       
-      raise MiqException::MiqVmError, _("Disk name is required") unless disk_name
-      raise MiqException::MiqVmError, _("Size increase is required") unless size_increase_gb
-      
-      _log.info("#{log_header} Resizing disk #{disk_name} by +#{size_increase_gb} GB...")
-      
-      connection = connect
-      
-      # Gérer différents formats de ems_ref
-      if vm.ems_ref.to_s.include?('/')
-        node_id, vmid = vm.ems_ref.split('/')
-      else
-        vmid = vm.ems_ref
-        node_id = vm.host&.ems_ref || vm.host&.name
-        _log.info("#{log_header} ems_ref does not contain node, using host: #{node_id}")
-      end
-      
-      raise MiqException::MiqVmError, _("Cannot determine Proxmox node (node_id=#{node_id.inspect}, vmid=#{vmid.inspect})") unless node_id && vmid
-      
-      _log.info("#{log_header} Proxmox node: #{node_id}, VM ID: #{vmid}")
-      
-      size_param = "+#{size_increase_gb}G"
-      connection.put("nodes/#{node_id}/qemu/#{vmid}/resize", { disk: disk_name, size: size_param })
-      
-      _log.info("#{log_header} Disk resize completed. Refreshing VM...")
-      EmsRefresh.queue_refresh(self)
-      
-      true
+      begin
+        response = connection.put(
+          "nodes/#{node_id}/qemu/#{vmid}/resize",
+          disk: disk_name,
+          size: "#{new_size_gb}G"
+        )
+        
+        _log.info("#{log_header} Disk #{disk_name} resized successfully: #{response.inspect}")
       rescue => err
-      _log.error("#{log_header} Disk resize failed: #{err}")
-      _log.error(err.backtrace.join("\n"))
-      raise MiqException::MiqVmError, _("An error occurred while resizing the disk: %{error}") % {:error => err}
+        _log.error("#{log_header} Error resizing disk #{disk_name}: #{err}")
+        raise MiqException::MiqVmError, "Failed to resize disk #{disk_name}: #{err}"
+      end
     end
+  end
+
+  def add_vm_disks(connection, node_id, vmid, disks_specs, log_header)
+    _log.warn("#{log_header} Adding disks not yet implemented")
+  end
+
+  def remove_vm_disks(connection, node_id, vmid, disks_specs, log_header)
+    _log.warn("#{log_header} Removing disks not yet implemented")
+  end
 
     def vm_set_memory(vm, options = {})
       spec = { 'memoryMB' => options[:value] }
