@@ -12,9 +12,10 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
 
   def hosts
     collector.nodes.each do |host|
+      ems_ref = host["id"].gsub("node/", "")
       persister.hosts.build(
-        :ems_ref     => host["id"],
-        :uid_ems     => host["id"],
+        :ems_ref     => ems_ref,
+        :uid_ems     => ems_ref,
         :name        => host["node"],
         :vmm_vendor  => "proxmox",
         :vmm_product => "Proxmox VE",
@@ -25,15 +26,16 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
 
   def storages
     collector.storages.each do |storage|
+      ems_ref = storage["id"].gsub("storage/", "")
+
       storage_obj = persister.storages.build(
-        :ems_ref => storage["id"],
+        :ems_ref => ems_ref,
         :name    => storage["storage"]
       )
 
-      host_ref = "node/#{storage["node"]}"
       persister.host_storages.build(
         :storage => storage_obj,
-        :host    => persister.hosts.lazy_find(host_ref)
+        :host    => persister.hosts.lazy_find(storage["node"])
       )
     end
   end
@@ -45,18 +47,19 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
 
   def vms
     collector.vms.each do |vm|
-      host_ref = "node/#{vm["node"]}" if vm["node"]
+      ems_ref  = vm["id"].gsub("qemu/", "")
+      host     = persister.hosts.lazy_find(vm["node"]) if vm["node"]
       template = vm["template"] == 1
       raw_power_state = template ? "never" : vm["status"]
 
       vm_obj = persister.vms_and_templates.build(
         :type            => "#{persister.manager.class}::#{template ? "Template" : "Vm"}",
-        :ems_ref         => vm["id"],
-        :uid_ems         => vm["id"],
+        :ems_ref         => ems_ref,
+        :uid_ems         => ems_ref,
         :name            => vm["name"],
         :template        => template,
         :raw_power_state => raw_power_state,
-        :host            => persister.hosts.lazy_find(host_ref),
+        :host            => host,
         :location        => "#{vm["node"]}/#{vm["vmid"]}",
         :vendor          => "proxmox"
       )

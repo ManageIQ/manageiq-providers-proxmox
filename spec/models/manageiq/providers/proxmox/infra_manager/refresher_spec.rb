@@ -34,7 +34,7 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Refresher do
   end
 
   def assert_specific_host
-    host = ems.hosts.find_by(:ems_ref => "node/pve")
+    host = ems.hosts.find_by(:ems_ref => "pve")
     expect(host).to have_attributes(
       :name            => "pve",
       :vmm_vendor      => "proxmox",
@@ -42,34 +42,34 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Refresher do
       :vmm_product     => "Proxmox VE",
       :vmm_buildnumber => nil,
       :power_state     => "on",
-      :uid_ems         => "node/pve",
-      :ems_ref         => "node/pve"
+      :uid_ems         => "pve",
+      :ems_ref         => "pve"
     )
   end
 
   def assert_specific_vm
-    vm = ems.vms.find_by(:ems_ref => "qemu/100")
+    vm = ems.vms.find_by(:ems_ref => "100")
     expect(vm).to have_attributes(
       :vendor          => "proxmox",
       :name            => "vm-test",
       :location        => "pve/100",
-      :host            => ems.hosts.find_by(:ems_ref => "node/pve"),
-      :uid_ems         => "qemu/100",
-      :ems_ref         => "qemu/100",
+      :host            => ems.hosts.find_by(:ems_ref => "pve"),
+      :uid_ems         => "100",
+      :ems_ref         => "100",
       :power_state     => "off",
       :raw_power_state => "stopped"
     )
   end
 
   def assert_specific_template
-    template = ems.miq_templates.find_by(:ems_ref => "qemu/101")
+    template = ems.miq_templates.find_by(:ems_ref => "101")
     expect(template).to have_attributes(
       :vendor          => "proxmox",
       :name            => "vm-template",
       :location        => "pve/101",
-      :host            => ems.hosts.find_by(:ems_ref => "node/pve"),
-      :uid_ems         => "qemu/101",
-      :ems_ref         => "qemu/101",
+      :host            => ems.hosts.find_by(:ems_ref => "pve"),
+      :uid_ems         => "101",
+      :ems_ref         => "101",
       :power_state     => "never",
       :raw_power_state => "never"
     )

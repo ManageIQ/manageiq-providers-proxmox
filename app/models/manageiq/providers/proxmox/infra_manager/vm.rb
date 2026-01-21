@@ -1,4 +1,6 @@
 class ManageIQ::Providers::Proxmox::InfraManager::Vm < ManageIQ::Providers::InfraManager::Vm
+  include Operations
+
   POWER_STATES = {
     "running"   => "on",
     "stopped"   => "off",
