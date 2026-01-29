@@ -1,6 +1,6 @@
 class ManageIQ::Providers::Proxmox::Inventory::Collector::InfraManager < ManageIQ::Providers::Proxmox::Inventory::Collector
   def cluster
-    @cluster ||= cluster_status_by_type["cluster"]&.first
+    @cluster ||= connection.request(:get, "/cluster/status")
   end
 
   def nodes
