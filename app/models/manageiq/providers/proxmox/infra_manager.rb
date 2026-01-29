@@ -10,6 +10,10 @@ class ManageIQ::Providers::Proxmox::InfraManager < ManageIQ::Providers::InfraMan
     @description ||= "Proxmox VE".freeze
   end
 
+  def allow_targeted_refresh?
+    true
+  end
+
   def self.params_for_create
     {
       :fields => [
