@@ -15,6 +15,17 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Refresher do
         assert_specific_vm
         assert_specific_template
       end
+
+      context "with an archived VM" do
+        let!(:archived_vm) { FactoryBot.create(:vm_proxmox, :ems_ref => "100") }
+
+        it "doesn't reconnect an archived VM with the same ems_ref" do
+          with_vcr { described_class.refresh([ems]) }
+
+          expect(archived_vm.reload).to be_archived
+          expect(ems.vms.find_by(:ems_ref => "100")).not_to eq(archived_vm)
+        end
+      end
     end
 
     context "targeted-refresh" do
