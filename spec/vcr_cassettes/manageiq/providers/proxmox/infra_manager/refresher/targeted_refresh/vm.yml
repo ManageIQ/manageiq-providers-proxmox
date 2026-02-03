@@ -1,0 +1,126 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://proxmox:8006/api2/json/access/ticket
+    body:
+      encoding: UTF-8
+      string: password=PROXMOX_PASSWORD&username=PROXMOX_USERNAME%40pam
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Feb 2026 13:59:42 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Length:
+      - '1619'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Feb 2026 13:59:42 GMT
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"cap":{"nodes":{"Sys.Modify":1,"Sys.AccessNetwork":1,"Sys.Audit":1,"Sys.Console":1,"Sys.PowerMgmt":1,"Sys.Incoming":1,"Permissions.Modify":1,"Sys.Syslog":1},"access":{"Permissions.Modify":1,"Group.Allocate":1,"User.Modify":1},"vms":{"VM.Replicate":1,"VM.Migrate":1,"VM.Allocate":1,"VM.Config.Disk":1,"VM.Config.Cloudinit":1,"VM.GuestAgent.Audit":1,"VM.Config.Memory":1,"VM.Console":1,"VM.GuestAgent.Unrestricted":1,"VM.GuestAgent.FileRead":1,"VM.Config.CPU":1,"Permissions.Modify":1,"VM.Backup":1,"VM.GuestAgent.FileSystemMgmt":1,"VM.GuestAgent.FileWrite":1,"VM.PowerMgmt":1,"VM.Config.Network":1,"VM.Config.Options":1,"VM.Audit":1,"VM.Config.HWType":1,"VM.Snapshot":1,"VM.Snapshot.Rollback":1,"VM.Clone":1,"VM.Config.CDROM":1},"mapping":{"Mapping.Audit":1,"Permissions.Modify":1,"Mapping.Modify":1,"Mapping.Use":1},"storage":{"Datastore.AllocateTemplate":1,"Datastore.Audit":1,"Datastore.Allocate":1,"Permissions.Modify":1,"Datastore.AllocateSpace":1},"sdn":{"SDN.Allocate":1,"SDN.Audit":1,"Permissions.Modify":1,"SDN.Use":1},"dc":{"Sys.Audit":1,"SDN.Allocate":1,"SDN.Audit":1,"SDN.Use":1,"Sys.Modify":1}},"clustername":"Cluster","username":"PROXMOX_USERNAME@pam","CSRFPreventionToken":"6981FF4E:5h8d979ah1viJhS/fXn1yzMZn3jTXj+++CNpDgETRI8","ticket":"PVE:PROXMOX_USERNAME@pam:6981FF4E::W5CrRodCKf5CvhIw6G6v5iSGj7CViD2CVWHGr67W24QPlAIO9dY0pmVdKBBoutDrRYT7T0yaTYUNZPTjz7KcWsJDZwJ5AQeA1Lgef8281oqrSjaxTd0zKgWJttCKOHlMsSvZ2uFPUnx8V47r6xvQ0HNyS7rwEUf161rWUnZJDi4QSgjJrc9W6plbQlNKpBgnYDvAcTHUdTRvtCdjnIN/QpFts4ixdBrn1m0La1D7hGrfxcQbVV5Eb8t2m+ceYD9ODFm5ykXl00Wis442s4KIJX79QG7vyBF033NhBs2atcItw5A9CpW679Ybx2vMm7xuL5Y1gEJJfdKhT9I98xnQPQ=="}}'
+  recorded_at: Tue, 03 Feb 2026 13:59:42 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/cluster/status
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Cookie:
+      - PVEAuthCookie=PVE:PROXMOX_USERNAME@pam:6981FF4E::W5CrRodCKf5CvhIw6G6v5iSGj7CViD2CVWHGr67W24QPlAIO9dY0pmVdKBBoutDrRYT7T0yaTYUNZPTjz7KcWsJDZwJ5AQeA1Lgef8281oqrSjaxTd0zKgWJttCKOHlMsSvZ2uFPUnx8V47r6xvQ0HNyS7rwEUf161rWUnZJDi4QSgjJrc9W6plbQlNKpBgnYDvAcTHUdTRvtCdjnIN/QpFts4ixdBrn1m0La1D7hGrfxcQbVV5Eb8t2m+ceYD9ODFm5ykXl00Wis442s4KIJX79QG7vyBF033NhBs2atcItw5A9CpW679Ybx2vMm7xuL5Y1gEJJfdKhT9I98xnQPQ==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Feb 2026 13:59:42 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Length:
+      - '206'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Feb 2026 13:59:42 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"id":"cluster","quorate":1,"name":"Cluster","version":1,"type":"cluster","nodes":1},{"online":1,"level":"","ip":"proxmox","local":1,"type":"node","name":"pve","nodeid":1,"id":"node/pve"}]}'
+  recorded_at: Tue, 03 Feb 2026 13:59:42 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/pve/qemu/100/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Cookie:
+      - PVEAuthCookie=PVE:PROXMOX_USERNAME@pam:6981FF4E::W5CrRodCKf5CvhIw6G6v5iSGj7CViD2CVWHGr67W24QPlAIO9dY0pmVdKBBoutDrRYT7T0yaTYUNZPTjz7KcWsJDZwJ5AQeA1Lgef8281oqrSjaxTd0zKgWJttCKOHlMsSvZ2uFPUnx8V47r6xvQ0HNyS7rwEUf161rWUnZJDi4QSgjJrc9W6plbQlNKpBgnYDvAcTHUdTRvtCdjnIN/QpFts4ixdBrn1m0La1D7hGrfxcQbVV5Eb8t2m+ceYD9ODFm5ykXl00Wis442s4KIJX79QG7vyBF033NhBs2atcItw5A9CpW679Ybx2vMm7xuL5Y1gEJJfdKhT9I98xnQPQ==
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Feb 2026 13:59:42 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Length:
+      - '218'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Feb 2026 13:59:42 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"maxmem":2147483648,"netin":0,"qmpstatus":"running","ha":{"managed":0},"cpus":1,"status":"running","mem":0,"disk":0,"name":"vm-test","vmid":100,"netout":0,"memhost":0,"uptime":0,"cpu":0,"maxdisk":34359738368}}'
+  recorded_at: Tue, 03 Feb 2026 13:59:42 GMT
+recorded_with: VCR 6.4.0
