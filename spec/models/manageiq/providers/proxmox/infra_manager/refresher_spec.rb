@@ -6,9 +6,7 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Refresher do
   describe ".refresh" do
     context "full-refresh" do
       it "performs a full refresh" do
-        with_vcr do
-          described_class.refresh([ems])
-        end
+        with_vcr { described_class.refresh([ems]) }
 
         assert_counts
         assert_ems_counts
@@ -16,6 +14,45 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Refresher do
         assert_specific_host
         assert_specific_vm
         assert_specific_template
+      end
+    end
+
+    context "targeted-refresh" do
+      let(:targets) { [target] }
+      before        { with_vcr { described_class.refresh([ems]) } }
+
+      context "with a Host target" do
+        let(:target) { ems.hosts.find_by(:ems_ref => "pve") }
+        before       { with_vcr("targeted-refresh/host") { described_class.refresh(targets) } }
+
+        it "doesn't impact unrelated inventory" do
+          assert_counts
+          assert_ems_counts
+          assert_specific_cluster
+          assert_specific_vm
+          assert_specific_template
+        end
+
+        it "updates the host's power state" do
+          expect(target.reload.power_state).to eq("off")
+        end
+      end
+
+      context "with a VM target" do
+        let(:target) { ems.vms.find_by(:ems_ref => "100") }
+        before       { with_vcr("targeted-refresh/vm") { described_class.refresh(targets) } }
+
+        it "doesn't impact unrelated inventory" do
+          assert_counts
+          assert_ems_counts
+          assert_specific_cluster
+          assert_specific_host
+          assert_specific_template
+        end
+
+        it "updates the VMs's power state" do
+          expect(target.reload.power_state).to eq("on")
+        end
       end
     end
   end
