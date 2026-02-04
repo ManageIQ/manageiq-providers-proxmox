@@ -12,8 +12,10 @@ class ManageIQ::Providers::Proxmox::InfraManager::EventCatcher::Runner < ManageI
   end
 
   def queue_event(event)
-    _log.debug("#{log_prefix} Caught event [#{event[:type]}] for VM [#{event[:vm_id]}]")
+    _log.debug("#{log_prefix} Caught event [#{event['type']}] for VM [#{event['id']}]")
     event_hash = ManageIQ::Providers::Proxmox::InfraManager::EventParser.event_to_hash(event, @cfg[:ems_id])
+    return if event_hash.nil?
+
     EmsEvent.add_queue('add', @cfg[:ems_id], event_hash)
   end
 

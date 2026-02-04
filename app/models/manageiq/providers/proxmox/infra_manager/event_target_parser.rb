@@ -12,14 +12,15 @@ class ManageIQ::Providers::Proxmox::InfraManager::EventTargetParser
     )
 
     raw_event = ems_event.full_data
+    vm_id = raw_event['id']
+    node = raw_event['node']
 
-    if raw_event[:vm_id].present?
-      vm_ems_ref = "#{raw_event[:node_id]}/#{raw_event[:vm_id]}"
-      target_collection.add_target(:association => :vms, :manager_ref => {:ems_ref => vm_ems_ref})
+    if vm_id.present? && node.present?
+      target_collection.add_target(:association => :vms, :manager_ref => {:ems_ref => "#{node}/#{vm_id}"})
     end
 
-    if raw_event[:node_id].present?
-      target_collection.add_target(:association => :hosts, :manager_ref => {:ems_ref => raw_event[:node_id]})
+    if node.present?
+      target_collection.add_target(:association => :hosts, :manager_ref => {:ems_ref => node})
     end
 
     target_collection.targets
