@@ -1,20 +1,17 @@
 module ManageIQ::Providers::Proxmox::InfraManager::EventParser
   def self.event_to_hash(event, ems_id)
-    event_hash = {
-      :event_type => "PROXMOX",
-      :source     => 'PROXMOX',
-      :ems_ref    => event[:id],
-      :timestamp  => event[:timestamp],
+    return nil if event['endtime'].blank?
+
+    {
+      :event_type => event['type'],
+      :source     => "PROXMOX",
+      :ems_ref    => event['upid'],
+      :timestamp  => Time.at(event['endtime']).utc,
       :full_data  => event,
-      :ems_id     => ems_id
+      :ems_id     => ems_id,
+      :vm_ems_ref => event['id'],
+      :vm_uid_ems => event['id'],
+      :message    => "#{event['type']} - #{event['status']}"
     }
-
-    if event[:vm_id].present?
-      vm_ems_ref = "#{event[:node_id]}/#{event[:vm_id]}"
-      event_hash[:vm_ems_ref] = vm_ems_ref
-      event_hash[:vm_uid_ems] = vm_ems_ref
-    end
-
-    event_hash
   end
 end
