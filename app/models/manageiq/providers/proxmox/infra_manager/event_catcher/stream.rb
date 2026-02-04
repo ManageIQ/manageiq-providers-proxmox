@@ -113,11 +113,9 @@ class ManageIQ::Providers::Proxmox::InfraManager::EventCatcher::Stream
 
     return if @processed_upids.include?(upid)
     return if task['endtime'] && task['endtime'] < @initialized_at
+    return if task['endtime'].blank?
 
-    event = task_to_event(task)
-    return unless event
-
-    block&.call(event)
+    block&.call(task)
     @processed_upids.add(upid)
 
     cleanup_processed_upids if @processed_upids.size > 10_000
@@ -140,30 +138,5 @@ class ManageIQ::Providers::Proxmox::InfraManager::EventCatcher::Stream
 
   def vm_related_task?(task)
     task['id'].present?
-  end
-
-  def task_to_event(task)
-    return nil if task['endtime'].blank?
-
-    {
-      :id        => task['upid'],
-      :name      => task['type'],
-      :timestamp => Time.at(task['endtime']).utc,
-      :status    => task['status'],
-      :vm_id     => task['id'],
-      :node_id   => task['node'],
-      :user      => task['user'],
-      :type      => task['type'],
-      :full_data => {
-        :upid      => task['upid'],
-        :node_id   => task['node'],
-        :status    => task['status'],
-        :user      => task['user'],
-        :id        => task['id'],
-        :type      => task['type'],
-        :starttime => task['starttime'],
-        :endtime   => task['endtime']
-      }
-    }
   end
 end
