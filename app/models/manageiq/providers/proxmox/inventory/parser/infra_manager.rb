@@ -23,24 +23,29 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
     cluster = cluster_data ? persister.clusters.lazy_find(cluster_data["id"]) : nil
 
     collector.nodes.each do |host|
+      node_name = host["node"]
       ems_ref = host["id"].gsub("node/", "")
+      details = collector.node_details[node_name] || {}
+      status = details[:status] || {}
+      version = details[:version] || {}
+
       host_obj = persister.hosts.build(
-        :ems_ref     => ems_ref,
-        :uid_ems     => ems_ref,
-        :name        => host["node"],
-        :vmm_vendor  => "proxmox",
-        :vmm_product => "Proxmox VE",
-        :power_state => host["status"] == "online" ? "on" : "off",
-        :ems_cluster => cluster
+        :ems_ref          => ems_ref,
+        :uid_ems          => ems_ref,
+        :name             => node_name,
+        :hostname         => node_name,
+        :ipaddress        => details[:ip],
+        :vmm_vendor       => "proxmox",
+        :vmm_product      => "Proxmox VE",
+        :vmm_version      => version["version"],
+        :vmm_buildnumber  => version["repoid"],
+        :power_state      => host["status"] == "online" ? "on" : "off",
+        :connection_state => host["status"] == "online" ? "connected" : "disconnected",
+        :ems_cluster      => cluster
       )
 
-      memory_mb = (host["maxmem"] / 1.megabyte) if host["maxmem"]
-
-      persister.host_hardwares.build(
-        :host            => host_obj,
-        :cpu_total_cores => host["maxcpu"],
-        :memory_mb       => memory_mb
-      )
+      parse_host_hardware(host_obj, host, status)
+      parse_host_operating_system(host_obj, version)
     end
   end
 
@@ -49,8 +54,13 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
       ems_ref = storage["id"].gsub("storage/", "")
 
       storage_obj = persister.storages.build(
-        :ems_ref => ems_ref,
-        :name    => storage["storage"]
+        :ems_ref            => ems_ref,
+        :name               => storage["storage"],
+        :store_type         => storage["plugintype"],
+        :total_space        => storage["maxdisk"],
+        :free_space         => storage["maxdisk"].to_i - storage["disk"].to_i,
+        :multiplehostaccess => storage["shared"] == 1,
+        :location           => storage["storage"]
       )
 
       persister.host_storages.build(
@@ -242,4 +252,34 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
     else ostype
     end
   end
+  private
+
+  def parse_host_hardware(host_obj, host, status)
+    cpuinfo = status["cpuinfo"] || {}
+    memory = status["memory"] || {}
+    rootfs = status["rootfs"] || {}
+
+    persister.host_hardwares.build(
+      :host                 => host_obj,
+      :cpu_type             => cpuinfo["model"] || "Unknown",
+      :cpu_speed            => cpuinfo["mhz"]&.to_f&.round,
+      :cpu_total_cores      => cpuinfo["cpus"] || host["maxcpu"],
+      :cpu_cores_per_socket => cpuinfo["cores"] || 1,
+      :cpu_sockets          => cpuinfo["sockets"] || 1,
+      :memory_mb            => memory["total"] ? (memory["total"] / 1.megabyte) : (host["maxmem"] / 1.megabyte),
+      :disk_capacity        => rootfs["total"]
+    )
+  end
+
+  def parse_host_operating_system(host_obj)
+    # Currently there is no suitable API Endpoint to determine the underlying base OS like Debian
+    persister.host_operating_systems.build(
+      :host         => host_obj,
+      :product_name => "Debian",
+      :version      => "N/A",
+      :build_number => "N/A"
+      :build_number => version["repoid"]
+    )
+  end
+
 end
