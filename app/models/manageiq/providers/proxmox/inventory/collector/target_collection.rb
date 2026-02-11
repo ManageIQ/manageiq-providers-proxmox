@@ -20,11 +20,11 @@ class ManageIQ::Providers::Proxmox::Inventory::Collector::TargetCollection < Man
     return [] if references(:vms).blank?
     return @vms if @vms
 
-    @vms ||= references(:vms).filter_map do |vm_ref|
+    @vms = references(:vms).filter_map do |vm_ref|
       node, vmid = vm_ref.split("/")
       next unless node && vmid
 
-      collect_vm_details("node" => node, "vmid" => vmid.to_i, "id" => "qemu/#{vmid}")
+      collect_vm_details("node" => node, "vmid" => vmid, "id" => "qemu/#{vmid}")
     end
   end
 
