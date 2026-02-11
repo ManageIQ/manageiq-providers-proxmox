@@ -13,6 +13,12 @@ class ManageIQ::Providers::Proxmox::Inventory::Collector < ManageIQ::Providers::
       "template" => config&.dig("template")
     }
 
+    begin
+      details["snapshots"] = connection.request(:get, "#{base}/snapshot")
+    rescue RuntimeError => err
+      $proxmox_log.warn("Failed to collect snapshots for VM #{vm["vmid"]}: #{err.message}")
+    end
+
     if status&.dig("status") == "running" && config&.dig("agent")&.to_s&.start_with?("1")
       begin
         details["agent_info"] = connection.request(:get, "#{base}/agent/get-osinfo")&.dig("result")
