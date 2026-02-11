@@ -71,9 +71,9 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
 
     collector.vms.each do |vm|
       ems_ref  = vm["id"].gsub("qemu/", "")
-      host     = persister.hosts.lazy_find(vm["node"]) if vm["node"]
       template = vm["template"] == 1
-      raw_power_state = template ? "never" : vm["status"]
+      config   = vm["config"] || {}
+      status   = vm["status"] || {}
 
       vm_obj = persister.vms_and_templates.build(
         :type            => "#{persister.manager.class}::#{template ? "Template" : "Vm"}",
@@ -81,12 +81,132 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
         :uid_ems         => ems_ref,
         :name            => vm["name"],
         :template        => template,
-        :raw_power_state => raw_power_state,
-        :host            => host,
+        :raw_power_state => template ? "never" : (status["qmpstatus"] || vm["status"]),
+        :host            => persister.hosts.lazy_find(vm["node"]),
         :ems_cluster     => cluster,
         :location        => "#{vm["node"]}/#{vm["vmid"]}",
-        :vendor          => "proxmox"
+        :vendor          => "proxmox",
+        :description     => config["description"],
+        :tools_status    => parse_tools_status(config, vm["agent_info"])
       )
+
+      hardware = parse_hardware(vm_obj, config, status)
+      parse_disks(hardware, config)
+      parse_networks(hardware, vm)
+      parse_operating_system(vm_obj, vm["agent_info"], config)
+    end
+  end
+
+  def parse_tools_status(config, agent_info)
+    return "toolsNotInstalled" unless config["agent"].to_s.start_with?("1")
+
+    agent_info.present? ? "toolsOk" : "toolsNotRunning"
+  end
+
+  def parse_hardware(vm_obj, config, status)
+    persister.hardwares.build(
+      :vm_or_template  => vm_obj,
+      :cpu_total_cores => status["cpus"] || (config["cores"].to_i * config.fetch("sockets", 1).to_i),
+      :memory_mb       => (status["maxmem"] || (config["memory"].to_i * 1024 * 1024)) / 1024 / 1024,
+      :disk_capacity   => status["maxdisk"]
+    )
+  end
+
+  def parse_disks(hardware, config)
+    disk_keys = config.keys.grep(/^(scsi|ide|sata|virtio|nvme)\d+$/)
+
+    disk_keys.each do |disk_id|
+      disk_str = config[disk_id]
+      next if disk_str.include?("media=cdrom")
+
+      size_bytes = parse_disk_size(disk_str)
+      storage_name = disk_str.split(":").first
+
+      persister.disks.build(
+        :hardware        => hardware,
+        :device_name     => disk_id,
+        :device_type     => "disk",
+        :controller_type => disk_id.gsub(/\d+$/, ""),
+        :size            => size_bytes,
+        :location        => disk_id,
+        :filename        => disk_str.split(",").first,
+        :storage         => persister.storages.lazy_find(storage_name)
+      )
+    end
+  end
+
+  def parse_disk_size(disk_str)
+    return nil unless disk_str
+
+    size_match = disk_str.match(/size=(\d+)([TGMK]?)/)
+    return nil unless size_match
+
+    size = size_match[1].to_i
+    unit = size_match[2]
+
+    case unit
+    when "T" then size * 1024 * 1024 * 1024 * 1024
+    when "G" then size * 1024 * 1024 * 1024
+    when "M" then size * 1024 * 1024
+    when "K" then size * 1024
+    else size
+    end
+  end
+
+  def parse_networks(hardware, vm)
+    agent_networks = vm["networks"]
+    return unless agent_networks
+
+    agent_networks.each do |iface|
+      next if iface["name"] == "lo"
+
+      mac = iface["hardware-address"]&.downcase
+      ipv4 = iface["ip-addresses"]&.find { |ip| ip["ip-address-type"] == "ipv4" }
+      ipv6 = iface["ip-addresses"]&.find { |ip| ip["ip-address-type"] == "ipv6" }
+
+      network = persister.networks.build(
+        :hardware    => hardware,
+        :description => iface["name"],
+        :hostname    => vm["hostname"],
+        :ipaddress   => ipv4&.dig("ip-address"),
+        :ipv6address => ipv6&.dig("ip-address")
+      )
+
+      persister.guest_devices.build(
+        :hardware        => hardware,
+        :uid_ems         => "#{vm["vmid"]}-#{iface["name"]}",
+        :device_name     => iface["name"],
+        :device_type     => "ethernet",
+        :controller_type => "ethernet",
+        :address         => mac,
+        :network         => network
+      )
+    end
+  end
+
+  def parse_mac(net_config)
+    net_config&.match(/([0-9a-fA-F:]{17})/)&.[](1)&.downcase
+  end
+
+  def parse_operating_system(vm_obj, agent_info, config)
+    product_name = if agent_info.present?
+                     agent_info["pretty-name"] || agent_info["name"]
+                   else
+                     map_ostype(config["ostype"])
+                   end
+
+    persister.operating_systems.build(
+      :vm_or_template => vm_obj,
+      :product_name   => product_name || "Unknown"
+    )
+  end
+
+  def map_ostype(ostype)
+    case ostype.to_s
+    when /^w/  then "Windows"
+    when "l26" then "Linux"
+    when "l24" then "Linux (2.4 kernel)"
+    else ostype
     end
   end
 end

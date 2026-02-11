@@ -5,8 +5,10 @@ class ManageIQ::Providers::Proxmox::Inventory::Persister::InfraManager < ManageI
     add_collection(infra, :host_hardwares)
     add_collection(infra, :storages)
     add_collection(infra, :host_storages)
+    add_collection(infra, :disks, :parent_inventory_collections => %i[vms_and_templates])
     add_collection(infra, :guest_devices, :parent_inventory_collections => %i[vms_and_templates])
     add_collection(infra, :hardwares, :parent_inventory_collections => %i[vms_and_templates])
+    add_collection(infra, :networks, :parent_inventory_collections => %i[vms_and_templates])
     add_collection(infra, :operating_systems, :parent_inventory_collections => %i[vms_and_templates])
     add_collection(infra, :vms_and_templates, {}, {:without_sti => true}) do |builder|
       builder.vm_template_shared

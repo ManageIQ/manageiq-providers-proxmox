@@ -24,9 +24,8 @@ class ManageIQ::Providers::Proxmox::Inventory::Collector::TargetCollection < Man
       node, vmid = vm_ref.split("/")
       next unless node && vmid
 
-      status_data = connection.request(:get, "/nodes/#{node}/qemu/#{vmid}/status/current")
-      status_data&.merge("node" => node, "id" => "qemu/#{vmid}")
-    end.compact
+      collect_vm_details("node" => node, "vmid" => vmid, "id" => "qemu/#{vmid}")
+    end
   end
 
   def storages

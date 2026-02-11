@@ -20,27 +20,24 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Alt-Svc:
+      - h3=":8006"; ma=2592000
       Cache-Control:
       - max-age=0
-      Connection:
-      - Keep-Alive
-      - close
-      Date:
-      - Tue, 03 Feb 2026 13:59:42 GMT
-      Pragma:
-      - no-cache
-      Server:
-      - pve-api-daemon/3.0
       Content-Length:
       - '1619'
       Content-Type:
       - application/json;charset=UTF-8
+      Date:
+      - Tue, 10 Feb 2026 14:30:09 GMT
       Expires:
-      - Tue, 03 Feb 2026 13:59:42 GMT
+      - Tue, 10 Feb 2026 14:30:09 GMT
+      Pragma:
+      - no-cache
     body:
       encoding: ASCII-8BIT
-      string: '{"data":{"cap":{"nodes":{"Sys.Modify":1,"Sys.AccessNetwork":1,"Sys.Audit":1,"Sys.Console":1,"Sys.PowerMgmt":1,"Sys.Incoming":1,"Permissions.Modify":1,"Sys.Syslog":1},"access":{"Permissions.Modify":1,"Group.Allocate":1,"User.Modify":1},"vms":{"VM.Replicate":1,"VM.Migrate":1,"VM.Allocate":1,"VM.Config.Disk":1,"VM.Config.Cloudinit":1,"VM.GuestAgent.Audit":1,"VM.Config.Memory":1,"VM.Console":1,"VM.GuestAgent.Unrestricted":1,"VM.GuestAgent.FileRead":1,"VM.Config.CPU":1,"Permissions.Modify":1,"VM.Backup":1,"VM.GuestAgent.FileSystemMgmt":1,"VM.GuestAgent.FileWrite":1,"VM.PowerMgmt":1,"VM.Config.Network":1,"VM.Config.Options":1,"VM.Audit":1,"VM.Config.HWType":1,"VM.Snapshot":1,"VM.Snapshot.Rollback":1,"VM.Clone":1,"VM.Config.CDROM":1},"mapping":{"Mapping.Audit":1,"Permissions.Modify":1,"Mapping.Modify":1,"Mapping.Use":1},"storage":{"Datastore.AllocateTemplate":1,"Datastore.Audit":1,"Datastore.Allocate":1,"Permissions.Modify":1,"Datastore.AllocateSpace":1},"sdn":{"SDN.Allocate":1,"SDN.Audit":1,"Permissions.Modify":1,"SDN.Use":1},"dc":{"Sys.Audit":1,"SDN.Allocate":1,"SDN.Audit":1,"SDN.Use":1,"Sys.Modify":1}},"clustername":"Cluster","username":"PROXMOX_USERNAME@pam","CSRFPreventionToken":"6981FF4E:5h8d979ah1viJhS/fXn1yzMZn3jTXj+++CNpDgETRI8","ticket":"PVE:PROXMOX_USERNAME@pam:6981FF4E::W5CrRodCKf5CvhIw6G6v5iSGj7CViD2CVWHGr67W24QPlAIO9dY0pmVdKBBoutDrRYT7T0yaTYUNZPTjz7KcWsJDZwJ5AQeA1Lgef8281oqrSjaxTd0zKgWJttCKOHlMsSvZ2uFPUnx8V47r6xvQ0HNyS7rwEUf161rWUnZJDi4QSgjJrc9W6plbQlNKpBgnYDvAcTHUdTRvtCdjnIN/QpFts4ixdBrn1m0La1D7hGrfxcQbVV5Eb8t2m+ceYD9ODFm5ykXl00Wis442s4KIJX79QG7vyBF033NhBs2atcItw5A9CpW679Ybx2vMm7xuL5Y1gEJJfdKhT9I98xnQPQ=="}}'
-  recorded_at: Tue, 03 Feb 2026 13:59:42 GMT
+      string: '{"data":{"username":"PROXMOX_USERNAME@pam","CSRFPreventionToken":"PVE_CSRF_TOKEN","cap":{"vms":{"VM.Audit":1,"VM.Replicate":1,"VM.GuestAgent.FileRead":1,"VM.Clone":1,"VM.Config.CDROM":1,"VM.Config.Cloudinit":1,"VM.Config.Memory":1,"VM.PowerMgmt":1,"VM.Allocate":1,"VM.Backup":1,"VM.GuestAgent.FileSystemMgmt":1,"VM.GuestAgent.Unrestricted":1,"VM.Config.Disk":1,"VM.Config.Options":1,"VM.Migrate":1,"VM.Snapshot.Rollback":1,"VM.Config.Network":1,"VM.GuestAgent.Audit":1,"VM.Config.CPU":1,"VM.GuestAgent.FileWrite":1,"VM.Config.HWType":1,"Permissions.Modify":1,"VM.Snapshot":1,"VM.Console":1},"nodes":{"Sys.PowerMgmt":1,"Sys.Incoming":1,"Sys.Modify":1,"Sys.Audit":1,"Sys.Syslog":1,"Permissions.Modify":1,"Sys.AccessNetwork":1,"Sys.Console":1},"mapping":{"Permissions.Modify":1,"Mapping.Modify":1,"Mapping.Audit":1,"Mapping.Use":1},"storage":{"Datastore.Audit":1,"Datastore.Allocate":1,"Datastore.AllocateTemplate":1,"Permissions.Modify":1,"Datastore.AllocateSpace":1},"dc":{"Sys.Modify":1,"SDN.Use":1,"Sys.Audit":1,"SDN.Audit":1,"SDN.Allocate":1},"access":{"Permissions.Modify":1,"Group.Allocate":1,"User.Modify":1},"sdn":{"SDN.Use":1,"SDN.Audit":1,"Permissions.Modify":1,"SDN.Allocate":1}},"ticket":"PVE_AUTH_TICKET","clustername":"pvetest"}}'
+  recorded_at: Tue, 10 Feb 2026 14:30:09 GMT
 - request:
     method: get
     uri: https://proxmox:8006/api2/json/cluster/status
@@ -51,7 +48,7 @@ http_interactions:
       User-Agent:
       - Faraday v2.14.0
       Cookie:
-      - PVEAuthCookie=PVE:PROXMOX_USERNAME@pam:6981FF4E::W5CrRodCKf5CvhIw6G6v5iSGj7CViD2CVWHGr67W24QPlAIO9dY0pmVdKBBoutDrRYT7T0yaTYUNZPTjz7KcWsJDZwJ5AQeA1Lgef8281oqrSjaxTd0zKgWJttCKOHlMsSvZ2uFPUnx8V47r6xvQ0HNyS7rwEUf161rWUnZJDi4QSgjJrc9W6plbQlNKpBgnYDvAcTHUdTRvtCdjnIN/QpFts4ixdBrn1m0La1D7hGrfxcQbVV5Eb8t2m+ceYD9ODFm5ykXl00Wis442s4KIJX79QG7vyBF033NhBs2atcItw5A9CpW679Ybx2vMm7xuL5Y1gEJJfdKhT9I98xnQPQ==
+      - PVEAuthCookie=PVE_AUTH_COOKIE
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -61,30 +58,27 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Alt-Svc:
+      - h3=":8006"; ma=2592000
       Cache-Control:
       - max-age=0
-      Connection:
-      - Keep-Alive
-      - close
-      Date:
-      - Tue, 03 Feb 2026 13:59:42 GMT
-      Pragma:
-      - no-cache
-      Server:
-      - pve-api-daemon/3.0
       Content-Length:
-      - '206'
+      - '343'
       Content-Type:
       - application/json;charset=UTF-8
+      Date:
+      - Tue, 10 Feb 2026 14:30:09 GMT
       Expires:
-      - Tue, 03 Feb 2026 13:59:42 GMT
+      - Tue, 10 Feb 2026 14:30:09 GMT
+      Pragma:
+      - no-cache
     body:
       encoding: UTF-8
-      string: '{"data":[{"id":"cluster","quorate":1,"name":"Cluster","version":1,"type":"cluster","nodes":1},{"online":1,"level":"","ip":"proxmox","local":1,"type":"node","name":"pve","nodeid":1,"id":"node/pve"}]}'
-  recorded_at: Tue, 03 Feb 2026 13:59:42 GMT
+      string: '{"data":[{"nodes":2,"type":"cluster","name":"pvetest","version":2,"quorate":1,"id":"cluster"},{"id":"node/vmpvetest","level":"c","nodeid":1,"name":"vmpvetest","ip":"192.0.2.202","online":1,"local":1,"type":"node"},{"name":"vmpvetest2","ip":"192.0.2.251","online":1,"local":0,"type":"node","id":"node/vmpvetest2","nodeid":2,"level":"c"}]}'
+  recorded_at: Tue, 10 Feb 2026 14:30:09 GMT
 - request:
     method: get
-    uri: https://proxmox:8006/api2/json/nodes/pve/qemu/100/status/current
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/100/config
     body:
       encoding: US-ASCII
       string: ''
@@ -92,7 +86,7 @@ http_interactions:
       User-Agent:
       - Faraday v2.14.0
       Cookie:
-      - PVEAuthCookie=PVE:PROXMOX_USERNAME@pam:6981FF4E::W5CrRodCKf5CvhIw6G6v5iSGj7CViD2CVWHGr67W24QPlAIO9dY0pmVdKBBoutDrRYT7T0yaTYUNZPTjz7KcWsJDZwJ5AQeA1Lgef8281oqrSjaxTd0zKgWJttCKOHlMsSvZ2uFPUnx8V47r6xvQ0HNyS7rwEUf161rWUnZJDi4QSgjJrc9W6plbQlNKpBgnYDvAcTHUdTRvtCdjnIN/QpFts4ixdBrn1m0La1D7hGrfxcQbVV5Eb8t2m+ceYD9ODFm5ykXl00Wis442s4KIJX79QG7vyBF033NhBs2atcItw5A9CpW679Ybx2vMm7xuL5Y1gEJJfdKhT9I98xnQPQ==
+      - PVEAuthCookie=PVE_AUTH_COOKIE
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -102,25 +96,179 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Alt-Svc:
+      - h3=":8006"; ma=2592000
       Cache-Control:
       - max-age=0
-      Connection:
-      - Keep-Alive
-      - close
-      Date:
-      - Tue, 03 Feb 2026 13:59:42 GMT
-      Pragma:
-      - no-cache
-      Server:
-      - pve-api-daemon/3.0
       Content-Length:
-      - '218'
+      - '923'
       Content-Type:
       - application/json;charset=UTF-8
+      Date:
+      - Tue, 10 Feb 2026 14:30:09 GMT
       Expires:
-      - Tue, 03 Feb 2026 13:59:42 GMT
+      - Tue, 10 Feb 2026 14:30:09 GMT
+      Pragma:
+      - no-cache
     body:
       encoding: UTF-8
-      string: '{"data":{"maxmem":2147483648,"netin":0,"qmpstatus":"running","ha":{"managed":0},"cpus":1,"status":"running","mem":0,"disk":0,"name":"vm-test","vmid":100,"netout":0,"memhost":0,"uptime":0,"cpu":0,"maxdisk":34359738368}}'
-  recorded_at: Tue, 03 Feb 2026 13:59:42 GMT
+      string: '{"data":{"vga":"type=virtio,memory=16","cpu":"host","boot":"order=scsi0;sata0","efidisk0":"local-lvm:vm-100-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","parent":"teststest","sockets":1,"agent":"1","scsihw":"virtio-scsi-single","numa":0,"smbios1":"uuid=945505a5-1a05-4e36-b571-5dcc38e45204","scsi1":"local-lvm:vm-100-disk-3,size=2G","kvm":1,"bios":"ovmf","name":"vmpvevm1","scsi2":"local-lvm:vm-100-disk-4,size=3G","onboot":0,"ostype":"l26","cores":4,"machine":"q35","net0":"virtio=BC:24:11:E2:9F:14,bridge=vmbr0","tpmstate0":"local-lvm:vm-100-disk-2,size=4M,version=v2.0","description":"Build
+        job: \nBuild SHA1: \nBuild date: 2025-11-17T19:50:19Z","vmgenid":"b2ed397e-97a1-45ac-a50f-d181e4c1ada7","digest":"6ad2e011f472899d0d3e800f382c40e4f4cb3b20","memory":"2048","meta":"creation-qemu=10.1.2,ctime=1763409034","scsi0":"local-lvm:vm-100-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=10G,ssd=1"}}'
+  recorded_at: Tue, 10 Feb 2026 14:30:09 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/100/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Alt-Svc:
+      - h3=":8006"; ma=2592000
+      Cache-Control:
+      - max-age=0
+      Content-Length:
+      - '5066'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 10 Feb 2026 14:30:09 GMT
+      Expires:
+      - Tue, 10 Feb 2026 14:30:09 GMT
+      Pragma:
+      - no-cache
+    body:
+      encoding: ASCII-8BIT
+      string: '{"data":{"pressurememorysome":0,"spice":1,"pressurecpufull":0,"mem":722448384,"qmpstatus":"running","memhost":1068873728,"netout":362103,"ballooninfo":{"last_update":1770733807,"mem_swapped_out":0,"max_mem":2147483648,"total_mem":2049388544,"minor_page_faults":814692,"major_page_faults":1485,"free_mem":1326940160,"actual":2147483648,"mem_swapped_in":0},"name":"vmpvevm1","disk":0,"vmid":100,"status":"running","clipboard":null,"maxdisk":10737418240,"freemem":1326940160,"cpus":4,"agent":1,"diskread":514712064,"netin":38802031,"pressurememoryfull":0,"pressureiofull":0,"blockstat":{"efidisk0":{"wr_total_time_ns":0,"invalid_flush_operations":0,"invalid_zone_append_operations":0,"unmap_merged":0,"invalid_unmap_operations":0,"account_invalid":true,"timed_stats":[],"wr_bytes":0,"account_failed":true,"zone_append_operations":0,"unmap_operations":0,"wr_operations":0,"failed_unmap_operations":0,"zone_append_merged":0,"wr_merged":0,"wr_highest_offset":65536,"invalid_rd_operations":0,"zone_append_bytes":0,"flush_total_time_ns":0,"failed_zone_append_operations":0,"failed_flush_operations":0,"zone_append_total_time_ns":0,"rd_total_time_ns":0,"rd_operations":0,"unmap_bytes":0,"unmap_total_time_ns":0,"rd_bytes":0,"invalid_wr_operations":0,"failed_wr_operations":0,"rd_merged":0,"failed_rd_operations":0,"flush_operations":0},"scsi2":{"flush_operations":0,"failed_rd_operations":0,"invalid_wr_operations":0,"failed_wr_operations":0,"rd_merged":0,"rd_operations":589,"rd_bytes":9351168,"unmap_bytes":0,"unmap_total_time_ns":0,"idle_time_ns":96346237839444,"zone_append_total_time_ns":0,"rd_total_time_ns":67329543,"invalid_rd_operations":0,"flush_total_time_ns":0,"failed_zone_append_operations":0,"failed_flush_operations":0,"zone_append_bytes":0,"wr_merged":0,"zone_append_merged":0,"failed_unmap_operations":0,"wr_highest_offset":0,"wr_bytes":0,"account_failed":true,"zone_append_operations":0,"account_invalid":true,"timed_stats":[],"unmap_operations":0,"wr_operations":0,"wr_total_time_ns":0,"unmap_merged":0,"invalid_unmap_operations":0,"invalid_flush_operations":0,"invalid_zone_append_operations":0},"scsi1":{"zone_append_bytes":0,"failed_flush_operations":0,"flush_total_time_ns":0,"failed_zone_append_operations":0,"invalid_rd_operations":0,"wr_highest_offset":0,"failed_unmap_operations":0,"wr_merged":0,"zone_append_merged":0,"wr_operations":0,"unmap_operations":0,"timed_stats":[],"account_invalid":true,"account_failed":true,"zone_append_operations":0,"wr_bytes":0,"invalid_zone_append_operations":0,"invalid_flush_operations":0,"invalid_unmap_operations":0,"unmap_merged":0,"wr_total_time_ns":0,"failed_rd_operations":0,"flush_operations":0,"rd_merged":0,"failed_wr_operations":0,"invalid_wr_operations":0,"idle_time_ns":96346246373508,"unmap_total_time_ns":0,"unmap_bytes":0,"rd_bytes":9351168,"rd_operations":589,"rd_total_time_ns":72020659,"zone_append_total_time_ns":0},"scsi0":{"rd_operations":9856,"rd_bytes":496009728,"idle_time_ns":4225127147,"unmap_total_time_ns":382740140,"unmap_bytes":8851387392,"rd_total_time_ns":4150268607,"zone_append_total_time_ns":0,"flush_operations":2230,"failed_rd_operations":0,"failed_wr_operations":0,"invalid_wr_operations":0,"rd_merged":0,"account_failed":true,"zone_append_operations":0,"wr_bytes":482042368,"account_invalid":true,"timed_stats":[],"wr_operations":16643,"unmap_operations":2853,"wr_total_time_ns":87214977977,"invalid_unmap_operations":0,"unmap_merged":0,"invalid_zone_append_operations":0,"invalid_flush_operations":0,"invalid_rd_operations":0,"failed_flush_operations":0,"flush_total_time_ns":565161081,"failed_zone_append_operations":0,"zone_append_bytes":0,"zone_append_merged":0,"wr_merged":0,"failed_unmap_operations":0,"wr_highest_offset":8845791232},"pflash0":{"flush_total_time_ns":0,"failed_zone_append_operations":0,"failed_flush_operations":0,"zone_append_bytes":0,"invalid_rd_operations":0,"wr_highest_offset":0,"zone_append_merged":0,"wr_merged":0,"failed_unmap_operations":0,"unmap_operations":0,"wr_operations":0,"wr_bytes":0,"zone_append_operations":0,"account_failed":true,"account_invalid":true,"timed_stats":[],"unmap_merged":0,"invalid_unmap_operations":0,"invalid_flush_operations":0,"invalid_zone_append_operations":0,"wr_total_time_ns":0,"flush_operations":0,"failed_rd_operations":0,"rd_merged":0,"invalid_wr_operations":0,"failed_wr_operations":0,"rd_bytes":0,"unmap_total_time_ns":0,"unmap_bytes":0,"rd_operations":0,"zone_append_total_time_ns":0,"rd_total_time_ns":0}},"uptime":96372,"maxmem":2147483648,"running-qemu":"10.1.2","proxmox-support":{"pbs-library-version":"2.0.1
+        (2b8ebba0cffecd479f296aaad82d8bec89355599)","pbs-dirty-bitmap-savevm":true,"pbs-masterkey":true,"backup-max-workers":true,"backup-fleecing":true,"pbs-dirty-bitmap-migration":true,"backup-access-api":true,"pbs-dirty-bitmap":true,"query-bitmap-info":true},"balloon":2147483648,"cpu":0.00575317572870629,"running-machine":"pc-q35-10.1+pve0","pressurecpusome":0,"pressureiosome":0,"pid":875971,"nics":{"tap100i0":{"netout":362103,"netin":38802031}},"ha":{"managed":0},"diskwrite":482042368}}'
+  recorded_at: Tue, 10 Feb 2026 14:30:09 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/100/agent/get-osinfo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Alt-Svc:
+      - h3=":8006"; ma=2592000
+      Cache-Control:
+      - max-age=0
+      Content-Length:
+      - '284'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 10 Feb 2026 14:30:09 GMT
+      Expires:
+      - Tue, 10 Feb 2026 14:30:09 GMT
+      Pragma:
+      - no-cache
+    body:
+      encoding: UTF-8
+      string: '{"data":{"result":{"name":"Debian GNU/Linux","pretty-name":"Debian
+        GNU/Linux 13 (trixie)","kernel-version":"#1 SMP PREEMPT_DYNAMIC Debian 6.12.63-1
+        (2025-12-30)","machine":"x86_64","kernel-release":"6.12.63+deb13-cloud-amd64","version-id":"13","id":"debian","version":"13
+        (trixie)"}}}'
+  recorded_at: Tue, 10 Feb 2026 14:30:09 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/100/agent/network-get-interfaces
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Alt-Svc:
+      - h3=":8006"; ma=2592000
+      Cache-Control:
+      - max-age=0
+      Content-Length:
+      - '895'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 10 Feb 2026 14:30:09 GMT
+      Expires:
+      - Tue, 10 Feb 2026 14:30:09 GMT
+      Pragma:
+      - no-cache
+    body:
+      encoding: UTF-8
+      string: '{"data":{"result":[{"ip-addresses":[{"prefix":8,"ip-address-type":"ipv4","ip-address":"192.0.2.1"},{"ip-address":"::1","ip-address-type":"ipv6","prefix":128}],"hardware-address":"00:00:00:00:00:00","statistics":{"rx-bytes":681,"tx-bytes":681,"rx-dropped":0,"tx-dropped":0,"tx-errs":0,"rx-errs":0,"rx-packets":6,"tx-packets":6},"name":"lo"},{"hardware-address":"bc:24:11:e2:9f:14","name":"ens18","statistics":{"tx-dropped":0,"rx-dropped":288,"tx-bytes":362103,"rx-bytes":38802031,"rx-packets":60451,"tx-packets":5213,"tx-errs":0,"rx-errs":0},"ip-addresses":[{"prefix":24,"ip-address":"192.0.2.253","ip-address-type":"ipv4"}]},{"statistics":{"rx-packets":0,"tx-packets":0,"tx-errs":0,"rx-errs":0,"rx-dropped":0,"tx-dropped":2,"tx-bytes":0,"rx-bytes":0},"hardware-address":"8a:90:19:c8:24:17","name":"docker0","ip-addresses":[{"prefix":24,"ip-address":"192.0.2.1","ip-address-type":"ipv4"}]}]}}'
+  recorded_at: Tue, 10 Feb 2026 14:30:09 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/100/agent/get-host-name
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.0
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Alt-Svc:
+      - h3=":8006"; ma=2592000
+      Cache-Control:
+      - max-age=0
+      Content-Length:
+      - '44'
+      Content-Type:
+      - application/json;charset=UTF-8
+      Date:
+      - Tue, 10 Feb 2026 14:30:09 GMT
+      Expires:
+      - Tue, 10 Feb 2026 14:30:09 GMT
+      Pragma:
+      - no-cache
+    body:
+      encoding: UTF-8
+      string: '{"data":{"result":{"host-name":"vmpvevm1"}}}'
+  recorded_at: Tue, 10 Feb 2026 14:30:09 GMT
 recorded_with: VCR 6.4.0

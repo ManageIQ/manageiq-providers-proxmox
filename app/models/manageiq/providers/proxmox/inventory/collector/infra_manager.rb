@@ -8,7 +8,7 @@ class ManageIQ::Providers::Proxmox::Inventory::Collector::InfraManager < ManageI
   end
 
   def vms
-    @vms ||= cluster_resources_by_type["qemu"]
+    @vms ||= cluster_resources_by_type["qemu"]&.map { |vm| collect_vm_details(vm) } || []
   end
 
   def storages

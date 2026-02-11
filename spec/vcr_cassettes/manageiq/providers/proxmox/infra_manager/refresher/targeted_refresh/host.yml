@@ -20,27 +20,24 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Alt-Svc:
+      - h3=":8006"; ma=2592000
       Cache-Control:
       - max-age=0
-      Connection:
-      - Keep-Alive
-      - close
-      Date:
-      - Tue, 03 Feb 2026 13:52:26 GMT
-      Pragma:
-      - no-cache
-      Server:
-      - pve-api-daemon/3.0
       Content-Length:
       - '1619'
       Content-Type:
       - application/json;charset=UTF-8
+      Date:
+      - Tue, 10 Feb 2026 14:30:07 GMT
       Expires:
-      - Tue, 03 Feb 2026 13:52:26 GMT
+      - Tue, 10 Feb 2026 14:30:07 GMT
+      Pragma:
+      - no-cache
     body:
       encoding: ASCII-8BIT
-      string: '{"data":{"cap":{"storage":{"Datastore.Allocate":1,"Datastore.AllocateSpace":1,"Permissions.Modify":1,"Datastore.AllocateTemplate":1,"Datastore.Audit":1},"mapping":{"Mapping.Use":1,"Mapping.Modify":1,"Permissions.Modify":1,"Mapping.Audit":1},"sdn":{"SDN.Allocate":1,"SDN.Audit":1,"Permissions.Modify":1,"SDN.Use":1},"dc":{"SDN.Audit":1,"SDN.Allocate":1,"Sys.Audit":1,"SDN.Use":1,"Sys.Modify":1},"nodes":{"Sys.Audit":1,"Sys.AccessNetwork":1,"Sys.Incoming":1,"Sys.PowerMgmt":1,"Sys.Console":1,"Permissions.Modify":1,"Sys.Syslog":1,"Sys.Modify":1},"access":{"Permissions.Modify":1,"Group.Allocate":1,"User.Modify":1},"vms":{"VM.Snapshot":1,"VM.Config.HWType":1,"VM.Audit":1,"VM.Config.CDROM":1,"VM.Clone":1,"VM.Snapshot.Rollback":1,"VM.GuestAgent.FileWrite":1,"VM.PowerMgmt":1,"VM.GuestAgent.FileSystemMgmt":1,"VM.Backup":1,"VM.Config.Options":1,"VM.Config.Network":1,"VM.GuestAgent.Unrestricted":1,"VM.GuestAgent.FileRead":1,"VM.Console":1,"VM.Config.Memory":1,"VM.GuestAgent.Audit":1,"Permissions.Modify":1,"VM.Config.CPU":1,"VM.Migrate":1,"VM.Replicate":1,"VM.Allocate":1,"VM.Config.Disk":1,"VM.Config.Cloudinit":1}},"clustername":"Cluster","username":"PROXMOX_USERNAME@pam","CSRFPreventionToken":"6981FD9A:v0C/StzC6pI9Zl00uoK8cdATF8UEaQ49yx3mmJ4aSHs","ticket":"PVE:PROXMOX_USERNAME@pam:6981FD9A::Xh66jMKguFH2ox6FUzL7aHGifMJ0XwId9U2K4e2DrHosruVoElQSO/Zu1VvmQrvRXpTzdo5lwbEPGU/FZi1WRBop9B252FN/poFNcHyL+LX3q9YsYQfTlYPAMOFsCAXPmPNwuB1J6jYNtfKQTHSi1P2uS0+TfPLis0n/SPc4sGvo5ZxXrxog+fjd+IBv3Og4AMphMSDKah9afPprapUOjWwb6PWFE5SAX67QQyLjPqOlh4y5+uQcfKmwI25KzOQnqPpp9XRXU428fCcsAX0Tlw5UL479NTAFeGPRUPZ0iyKIFVA0MejW3ooLHuMYnY2L+QK2cym661iZFri3BhseyA=="}}'
-  recorded_at: Tue, 03 Feb 2026 13:52:26 GMT
+      string: '{"data":{"ticket":"PVE_AUTH_TICKET","cap":{"vms":{"VM.Snapshot":1,"Permissions.Modify":1,"VM.Console":1,"VM.Config.CPU":1,"VM.Config.HWType":1,"VM.GuestAgent.FileWrite":1,"VM.GuestAgent.Audit":1,"VM.Config.Disk":1,"VM.Config.Options":1,"VM.Snapshot.Rollback":1,"VM.Config.Network":1,"VM.Migrate":1,"VM.Backup":1,"VM.GuestAgent.FileSystemMgmt":1,"VM.GuestAgent.Unrestricted":1,"VM.PowerMgmt":1,"VM.Allocate":1,"VM.Config.Memory":1,"VM.Audit":1,"VM.Replicate":1,"VM.Config.Cloudinit":1,"VM.GuestAgent.FileRead":1,"VM.Clone":1,"VM.Config.CDROM":1},"nodes":{"Sys.Console":1,"Sys.Syslog":1,"Permissions.Modify":1,"Sys.AccessNetwork":1,"Sys.Audit":1,"Sys.Modify":1,"Sys.PowerMgmt":1,"Sys.Incoming":1},"mapping":{"Mapping.Audit":1,"Mapping.Modify":1,"Permissions.Modify":1,"Mapping.Use":1},"storage":{"Permissions.Modify":1,"Datastore.AllocateSpace":1,"Datastore.AllocateTemplate":1,"Datastore.Allocate":1,"Datastore.Audit":1},"dc":{"Sys.Modify":1,"SDN.Use":1,"SDN.Audit":1,"Sys.Audit":1,"SDN.Allocate":1},"sdn":{"SDN.Use":1,"Permissions.Modify":1,"SDN.Allocate":1,"SDN.Audit":1},"access":{"Permissions.Modify":1,"Group.Allocate":1,"User.Modify":1}},"CSRFPreventionToken":"PVE_CSRF_TOKEN","username":"PROXMOX_USERNAME@pam","clustername":"pvetest"}}'
+  recorded_at: Tue, 10 Feb 2026 14:30:07 GMT
 - request:
     method: get
     uri: https://proxmox:8006/api2/json/cluster/status
@@ -51,7 +48,7 @@ http_interactions:
       User-Agent:
       - Faraday v2.14.0
       Cookie:
-      - PVEAuthCookie=PVE:PROXMOX_USERNAME@pam:6981FD9A::Xh66jMKguFH2ox6FUzL7aHGifMJ0XwId9U2K4e2DrHosruVoElQSO/Zu1VvmQrvRXpTzdo5lwbEPGU/FZi1WRBop9B252FN/poFNcHyL+LX3q9YsYQfTlYPAMOFsCAXPmPNwuB1J6jYNtfKQTHSi1P2uS0+TfPLis0n/SPc4sGvo5ZxXrxog+fjd+IBv3Og4AMphMSDKah9afPprapUOjWwb6PWFE5SAX67QQyLjPqOlh4y5+uQcfKmwI25KzOQnqPpp9XRXU428fCcsAX0Tlw5UL479NTAFeGPRUPZ0iyKIFVA0MejW3ooLHuMYnY2L+QK2cym661iZFri3BhseyA==
+      - PVEAuthCookie=PVE_AUTH_COOKIE
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -61,27 +58,24 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Alt-Svc:
+      - h3=":8006"; ma=2592000
       Cache-Control:
       - max-age=0
-      Connection:
-      - Keep-Alive
-      - close
-      Date:
-      - Tue, 03 Feb 2026 13:52:26 GMT
-      Pragma:
-      - no-cache
-      Server:
-      - pve-api-daemon/3.0
       Content-Length:
-      - '206'
+      - '343'
       Content-Type:
       - application/json;charset=UTF-8
+      Date:
+      - Tue, 10 Feb 2026 14:30:07 GMT
       Expires:
-      - Tue, 03 Feb 2026 13:52:26 GMT
+      - Tue, 10 Feb 2026 14:30:07 GMT
+      Pragma:
+      - no-cache
     body:
       encoding: UTF-8
-      string: '{"data":[{"id":"cluster","quorate":1,"name":"Cluster","version":1,"type":"cluster","nodes":1},{"type":"node","local":1,"ip":"proxmox","id":"node/pve","nodeid":1,"name":"pve","online":1,"level":""}]}'
-  recorded_at: Tue, 03 Feb 2026 13:52:26 GMT
+      string: '{"data":[{"name":"pvetest","type":"cluster","nodes":2,"id":"cluster","quorate":1,"version":2},{"online":1,"type":"node","local":1,"ip":"192.0.2.202","name":"vmpvetest","level":"c","nodeid":1,"id":"node/vmpvetest"},{"id":"node/vmpvetest2","level":"c","nodeid":2,"name":"vmpvetest2","ip":"192.0.2.251","type":"node","local":0,"online":1}]}'
+  recorded_at: Tue, 10 Feb 2026 14:30:07 GMT
 - request:
     method: get
     uri: https://proxmox:8006/api2/json/nodes
@@ -92,7 +86,7 @@ http_interactions:
       User-Agent:
       - Faraday v2.14.0
       Cookie:
-      - PVEAuthCookie=PVE:PROXMOX_USERNAME@pam:6981FD9A::Xh66jMKguFH2ox6FUzL7aHGifMJ0XwId9U2K4e2DrHosruVoElQSO/Zu1VvmQrvRXpTzdo5lwbEPGU/FZi1WRBop9B252FN/poFNcHyL+LX3q9YsYQfTlYPAMOFsCAXPmPNwuB1J6jYNtfKQTHSi1P2uS0+TfPLis0n/SPc4sGvo5ZxXrxog+fjd+IBv3Og4AMphMSDKah9afPprapUOjWwb6PWFE5SAX67QQyLjPqOlh4y5+uQcfKmwI25KzOQnqPpp9XRXU428fCcsAX0Tlw5UL479NTAFeGPRUPZ0iyKIFVA0MejW3ooLHuMYnY2L+QK2cym661iZFri3BhseyA==
+      - PVEAuthCookie=PVE_AUTH_COOKIE
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -102,24 +96,22 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      Alt-Svc:
+      - h3=":8006"; ma=2592000
       Cache-Control:
       - max-age=0
-      Connection:
-      - Keep-Alive
-      Date:
-      - Tue, 03 Feb 2026 13:52:26 GMT
-      Pragma:
-      - no-cache
-      Server:
-      - pve-api-daemon/3.0
       Content-Length:
-      - '328'
+      - '682'
       Content-Type:
       - application/json;charset=UTF-8
+      Date:
+      - Tue, 10 Feb 2026 14:30:07 GMT
       Expires:
-      - Tue, 03 Feb 2026 13:52:26 GMT
+      - Tue, 10 Feb 2026 14:30:07 GMT
+      Pragma:
+      - no-cache
     body:
       encoding: UTF-8
-      string: '{"data":[{"mem":1601916928,"uptime":419199,"level":"","disk":4108300288,"ssl_fingerprint":"AE:DB:68:93:C1:C7:89:18:65:17:BB:15:CB:B4:E6:DA:0D:B2:AB:FB:4F:50:7C:13:79:72:2D:5F:C1:13:44:D9","node":"pve","maxcpu":2,"type":"node","id":"node/pve","maxmem":2062860288,"cpu":0.0224411603721949,"status":"offline","maxdisk":9183899648}]}'
-  recorded_at: Tue, 03 Feb 2026 13:52:26 GMT
+      string: '{"data":[{"uptime":1816369,"node":"vmpvetest2","maxmem":33655623680,"maxdisk":997852446720,"maxcpu":8,"status":"online","mem":6715817984,"level":"c","disk":3945922560,"id":"node/vmpvetest2","cpu":0.138293874483277,"type":"node","ssl_fingerprint":"77:1A:4F:20:EE:C9:46:08:64:D3:D2:E0:1F:29:42:1C:9C:6B:D4:E7:19:57:00:83:45:B2:6A:E7:F2:33:DD:0A"},{"type":"node","cpu":0.0135151890886547,"id":"node/vmpvetest","ssl_fingerprint":"BA:E5:F9:9B:69:97:05:3E:09:37:77:83:DA:55:BD:79:A9:D5:DF:4D:71:47:BC:9F:A0:36:51:1E:85:9C:B9:09","status":"online","maxcpu":8,"level":"c","disk":87713783808,"mem":4476502016,"maxdisk":100861726720,"node":"vmpvetest","uptime":1820400,"maxmem":33655623680}]}'
+  recorded_at: Tue, 10 Feb 2026 14:30:07 GMT
 recorded_with: VCR 6.4.0
