@@ -14,3 +14,8 @@
     :user:
 :log:
   :level_proxmox: info
+:workers:
+  :worker_base:
+    :queue_worker_base:
+      :ems_refresh_worker:
+        :ems_refresh_worker_proxmox: {}
