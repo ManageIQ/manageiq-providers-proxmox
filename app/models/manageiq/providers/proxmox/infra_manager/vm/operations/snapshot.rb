@@ -53,15 +53,15 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Operations::Snapshot
   end
 
   def raw_create_snapshot(name, desc = nil, memory = false)
-    _log.info("Creating snapshot for VM #{self.name} with name=#{name.inspect}, desc=#{desc.inspect}, memory=#{memory.inspect}")
+    $proxmox_log.info("Creating snapshot for VM #{self.name} with name=#{name.inspect}, desc=#{desc.inspect}, memory=#{memory.inspect}")
     raise MiqException::MiqVmSnapshotError, "Snapshot name is required" if name.blank?
 
     with_provider_connection do |connection|
       params = {:snapname => name}
       params[:description] = desc if desc.present?
       params[:vmstate] = 1 if memory && current_state == 'on'
-      # Pass as query params to work around SDK bug (body.to_json instead of form-encoding)
-      connection.request(:post, "/nodes/#{host.ems_ref}/qemu/#{ems_ref}/snapshot?#{URI.encode_www_form(params)}")
+      upid = connection.request(:post, "/nodes/#{host.ems_ref}/qemu/#{ems_ref}/snapshot?#{URI.encode_www_form(params)}")
+      wait_for_task(connection, upid)
     end
   rescue => err
     error_message = parse_api_error(err)
@@ -74,7 +74,8 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Operations::Snapshot
     raise _("Requested VM snapshot not found, unable to remove snapshot") unless snapshot
 
     with_provider_connection do |connection|
-      connection.request(:delete, "/nodes/#{host.ems_ref}/qemu/#{ems_ref}/snapshot/#{snapshot.name}")
+      upid = connection.request(:delete, "/nodes/#{host.ems_ref}/qemu/#{ems_ref}/snapshot/#{snapshot.name}")
+      wait_for_task(connection, upid)
     end
   rescue => err
     error_message = parse_api_error(err)
@@ -89,7 +90,8 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Operations::Snapshot
     raise _("Requested VM snapshot not found, unable to revert to snapshot") unless snapshot
 
     with_provider_connection do |connection|
-      connection.request(:post, "/nodes/#{host.ems_ref}/qemu/#{ems_ref}/snapshot/#{snapshot.name}/rollback")
+      upid = connection.request(:post, "/nodes/#{host.ems_ref}/qemu/#{ems_ref}/snapshot/#{snapshot.name}/rollback")
+      wait_for_task(connection, upid)
     end
   rescue => err
     error_message = parse_api_error(err)
@@ -105,7 +107,8 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Operations::Snapshot
       snapshot_list.each do |snapshot|
         next if snapshot["name"] == "current"
 
-        connection.request(:delete, "/nodes/#{host.ems_ref}/qemu/#{ems_ref}/snapshot/#{snapshot["name"]}")
+        upid = connection.request(:delete, "/nodes/#{host.ems_ref}/qemu/#{ems_ref}/snapshot/#{snapshot["name"]}")
+        wait_for_task(connection, upid)
       end
     end
   rescue => err
@@ -116,6 +119,30 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Operations::Snapshot
 
   private
 
+  def wait_for_task(connection, upid, timeout: 300, interval: 2)
+    return unless upid.kind_of?(String) && upid.start_with?("UPID:")
+
+    node = upid.split(":")[1]
+    encoded_upid = URI.encode_www_form_component(upid)
+    deadline = Time.now.utc + timeout
+
+    loop do
+      status = connection.request(:get, "/nodes/#{node}/tasks/#{encoded_upid}/status")
+      case status["status"]
+      when "stopped"
+        return if status["exitstatus"] == "OK"
+
+        raise "Task failed: #{status["exitstatus"]}"
+      when "running"
+        raise Timeout::Error, "Task #{upid} timed out after #{timeout}s" if Time.now.utc > deadline
+
+        sleep(interval)
+      else
+        raise "Unknown task status: #{status["status"]}"
+      end
+    end
+  end
+
   def parse_api_error(err)
     msg = err.to_s
     return msg unless msg.start_with?("ApiError:")
@@ -124,7 +151,7 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Operations::Snapshot
     data = JSON.parse(json_str)
     parts = []
     parts << data["message"].strip if data["message"].present?
-    if data["errors"].is_a?(Hash)
+    if data["errors"].kind_of?(Hash)
       data["errors"].each { |field, error| parts << "#{field}: #{error.strip}" }
     end
     parts.any? ? parts.join(" ") : msg
