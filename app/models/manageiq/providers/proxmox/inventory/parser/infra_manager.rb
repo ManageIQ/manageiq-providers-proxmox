@@ -94,6 +94,39 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
       parse_disks(hardware, config)
       parse_networks(hardware, vm)
       parse_operating_system(vm_obj, vm["agent_info"], config)
+      parse_snapshots(vm_obj, vm["snapshots"])
+    end
+  end
+
+  def parse_snapshots(vm_obj, snapshots)
+    return unless snapshots
+
+    current_snapshot = snapshots.find { |s| s["name"] == "current" }
+    current_parent = current_snapshot&.dig("parent")
+
+    snapshots.each do |snapshot|
+      next if snapshot["name"] == "current"
+
+      parent = nil
+      if snapshot["parent"].present?
+        parent = persister.snapshots.lazy_find(
+          :vm_or_template => vm_obj,
+          :uid            => snapshot["parent"]
+        )
+      end
+
+      persister.snapshots.build(
+        :uid_ems        => snapshot["name"],
+        :uid            => snapshot["name"],
+        :ems_ref        => snapshot["name"],
+        :parent_uid     => snapshot["parent"],
+        :parent         => parent,
+        :name           => snapshot["name"],
+        :description    => snapshot["description"],
+        :create_time    => snapshot["snaptime"] ? Time.zone.at(snapshot["snaptime"].to_i) : nil,
+        :current        => snapshot["name"] == current_parent,
+        :vm_or_template => vm_obj
+      )
     end
   end
 
