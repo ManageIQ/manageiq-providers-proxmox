@@ -4,6 +4,7 @@ class ManageIQ::Providers::Proxmox::Inventory::Persister::InfraManager < ManageI
     add_collection(infra, :hosts)
     add_collection(infra, :host_hardwares, :parent_inventory_collections => %i[hosts])
     add_collection(infra, :host_operating_systems, :parent_inventory_collections => %i[hosts])
+    add_collection(infra, :host_guest_devices, :parent_inventory_collections => %i[hosts])
     add_collection(infra, :storages)
     add_collection(infra, :host_storages, :parent_inventory_collections => %i[hosts])
     add_collection(infra, :disks, :parent_inventory_collections => %i[vms_and_templates])

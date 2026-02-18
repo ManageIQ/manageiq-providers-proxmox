@@ -24,10 +24,11 @@ class ManageIQ::Providers::Proxmox::Inventory::Collector::TargetCollection < Man
     @node_details ||= nodes.each_with_object({}) do |node, hash|
       node_name = node["node"]
       hash[node_name] = {
-        :status  => node_status(node_name),
-        :version => node_version(node_name),
-        :storage => node_storage(node_name),
-        :ip      => node_ip(node_name)
+        :status   => node_status(node_name),
+        :version  => node_version(node_name),
+        :storage  => node_storage(node_name),
+        :ip       => node_ip(node_name),
+        :networks => node_networks(node_name)
       }
     end
   end
@@ -76,6 +77,13 @@ class ManageIQ::Providers::Proxmox::Inventory::Collector::TargetCollection < Man
     connection.request(:get, "/nodes/#{node_name}/storage")
   rescue => e
     _log.warn("Failed to fetch storage for node #{node_name}: #{e.message}")
+    []
+  end
+
+  def node_networks(node_name)
+    connection.request(:get, "/nodes/#{node_name}/network")
+  rescue => e
+    _log.warn("Failed to fetch networks for node #{node_name}: #{e.message}")
     []
   end
 

@@ -44,8 +44,9 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
         :ems_cluster      => cluster
       )
 
-      parse_host_hardware(host_obj, host, status)
+      hardware = parse_host_hardware(host_obj, host, status)
       parse_host_operating_system(host_obj, version)
+      parse_host_network_adapters(hardware, details[:networks])
     end
   end
 
@@ -275,11 +276,29 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
     # Currently there is no suitable API Endpoint to determine the underlying base OS like Debian
     persister.host_operating_systems.build(
       :host         => host_obj,
+      :name         => "Proxmox VE",
       :product_name => "Debian",
       :version      => "N/A",
       :build_number => "N/A"
-      :build_number => version["repoid"]
     )
   end
 
+  def parse_host_network_adapters(hardware, networks)
+    return if networks.blank?
+
+    networks.each do |iface|
+      next unless iface["type"] == "eth"
+
+      persister.host_guest_devices.build(
+        :hardware        => hardware,
+        :uid_ems         => iface["iface"],
+        :device_name     => iface["iface"],
+        :device_type     => "ethernet",
+        :controller_type => "ethernet",
+        :present         => iface["active"] == 1,
+        :address         => iface["address"],
+        :location        => iface["iface"]
+      )
+    end
+  end
 end
