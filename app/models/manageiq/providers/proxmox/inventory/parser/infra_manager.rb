@@ -45,8 +45,9 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
       )
 
       hardware = parse_host_hardware(host_obj, host, status)
-      parse_host_operating_system(host_obj, version)
+      parse_host_operating_system(host_obj)
       parse_host_network_adapters(hardware, details[:networks])
+      parse_host_switches(host_obj, hardware, details[:networks])
     end
   end
 
@@ -299,6 +300,45 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
         :address         => iface["address"],
         :location        => iface["iface"]
       )
+    end
+  end
+
+  def parse_host_switches(host_obj, hardware, networks)
+    return if networks.blank?
+
+    switch_type = ManageIQ::Providers::Proxmox::InfraManager::HostVirtualSwitch.name
+    switches = {}
+
+    networks.each do |iface|
+      next unless iface["type"] == "bridge"
+
+      switch = persister.host_virtual_switches.build(
+        :host    => host_obj,
+        :uid_ems => iface["iface"],
+        :name    => iface["iface"],
+        :type    => switch_type
+      )
+      switches[iface["iface"]] = switch
+
+      persister.host_switches.build(:host => host_obj, :switch => switch)
+
+      persister.host_virtual_lans.build(
+        :switch  => switch,
+        :uid_ems => iface["iface"],
+        :name    => iface["iface"],
+        :tag     => ""
+      )
+
+      link_pnics_to_switch(hardware, iface["bridge_ports"], switch)
+    end
+  end
+
+  def link_pnics_to_switch(hardware, bridge_ports, switch)
+    return if bridge_ports.blank?
+
+    bridge_ports.to_s.split.each do |pnic_name|
+      pnic = persister.host_guest_devices.find_or_build_by(:hardware => hardware, :uid_ems => pnic_name)
+      pnic.assign_attributes(:switch => switch)
     end
   end
 end
