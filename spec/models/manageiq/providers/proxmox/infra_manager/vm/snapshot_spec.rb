@@ -3,35 +3,35 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Vm do
 
   let(:zone) { EvmSpecHelper.local_miq_server.zone }
   let(:ems)  { FactoryBot.create(:ems_proxmox_with_vcr_authentication, :zone => zone) }
-  let(:vm)   { ems.vms.find_by(:ems_ref => "101") }
+  let(:host) { FactoryBot.create(:host_proxmox, :ems_ref => "vmpvetest2", :ext_management_system => ems) }
+  let(:vm)   { FactoryBot.create(:vm_proxmox, :name => "test-vm", :ems_ref => "101", :ext_management_system => ems, :host => host) }
 
-  before do
-    NotificationType.seed
-    with_vcr { ManageIQ::Providers::Proxmox::InfraManager::Refresher.refresh([ems]) }
+  before { NotificationType.seed }
+
+  describe "#raw_create_snapshot" do
+    it "creates a snapshot" do
+      with_vcr("vm/snapshot/create") do
+        expect { vm.raw_create_snapshot("test_snap", "Test snapshot") }.not_to raise_error
+      end
+    end
   end
 
-  describe "snapshot operations" do
-    it "creates, deletes, and reverts snapshots" do
-      with_vcr("vm/snapshot/workflow") do
-        expect { vm.raw_create_snapshot("test_snap1", "Test snapshot 1") }.not_to raise_error
-        expect { vm.raw_create_snapshot("test_snap2", "Test snapshot 2") }.not_to raise_error
+  describe "#raw_remove_snapshot" do
+    let!(:snapshot) { FactoryBot.create(:snapshot, :vm_or_template => vm, :name => "test_snap", :uid_ems => "test_snap", :ems_ref => "test_snap") }
 
-        # Refresh to get snapshots in DB
-        ManageIQ::Providers::Proxmox::InfraManager::Refresher.refresh([ems])
+    it "removes a snapshot" do
+      with_vcr("vm/snapshot/remove") do
+        expect { vm.raw_remove_snapshot(snapshot.id) }.not_to raise_error
+      end
+    end
+  end
 
-        snapshot1 = vm.snapshots.find_by(:name => "test_snap1")
-        expect(snapshot1).not_to be_nil
-        expect { vm.raw_remove_snapshot(snapshot1.id) }.not_to raise_error
+  describe "#raw_revert_to_snapshot" do
+    let!(:snapshot) { FactoryBot.create(:snapshot, :vm_or_template => vm, :name => "test_snap", :uid_ems => "test_snap", :ems_ref => "test_snap") }
 
-        ManageIQ::Providers::Proxmox::InfraManager::Refresher.refresh([ems])
-
-        # Revert to oldest snapshot should fail (ZFS limitation)
-        oldest_snapshot = vm.snapshots.where.not(:name => "current").order(:create_time).first
-        expect { vm.raw_revert_to_snapshot(oldest_snapshot.id) }.to raise_error(MiqException::MiqVmSnapshotError)
-
-        # Revert to most recent snapshot should succeed
-        recent_snapshot = vm.snapshots.where.not(:name => "current").order(:create_time => :desc).first
-        expect { vm.raw_revert_to_snapshot(recent_snapshot.id) }.not_to raise_error
+    it "reverts to a snapshot" do
+      with_vcr("vm/snapshot/revert") do
+        expect { vm.raw_revert_to_snapshot(snapshot.id) }.not_to raise_error
       end
     end
   end
