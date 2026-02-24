@@ -73,10 +73,6 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Operations::Snapshot
 
   private
 
-  def vm_path
-    "/nodes/#{host.ems_ref}/qemu/#{ems_ref}"
-  end
-
   def run_task(method, path)
     with_provider_connection do |connection|
       upid = connection.request(method, "#{vm_path}/#{path}")
