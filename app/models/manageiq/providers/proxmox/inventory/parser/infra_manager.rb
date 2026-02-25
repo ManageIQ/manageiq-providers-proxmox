@@ -49,11 +49,18 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
     collector.storages.each do |storage_data|
       puts "  - Storage: #{storage_data['storage']}"
       persister.storages.build(
-        :ems_ref      => storage_data['storage'],
-        :name         => storage_data['storage'],
-        :store_type   => storage_data['plugintype'] || storage_data['content'],
-        :total_space  => storage_data['maxdisk'],
-        :free_space   => (storage_data['maxdisk'] || 0) - (storage_data['disk'] || 0)
+        :ems_ref          => storage_data['storage'],
+        :name             => storage_data['storage'],
+        :store_type       => storage_data['plugintype'] || storage_data['content'],
+        :total_space      => storage_data['maxdisk'],
+        :free_space       => (storage_data['maxdisk'] || 0) - (storage_data['disk'] || 0),
+        :uncommitted      => storage_data['disk'] || 0,
+        :multiplehostaccess => storage_data['shared'].to_i == 1,
+        :location         => storage_data['path'] || storage_data['server'],
+        :storage_type     => map_storage_type(storage_data['type']),
+        :enabled          => storage_data['enabled'].to_i == 1,
+        :directory_hierarchy_supported => false,
+        :thin_provisioning_supported => storage_data['content']&.include?('images')
       )
     end
   end
@@ -240,4 +247,18 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
     else ostype
     end
   end
+
+private
+
+def map_storage_type(proxmox_type)
+  case proxmox_type
+  when 'dir', 'nfs' then 'NFS'
+  when 'lvm', 'lvmthin' then 'LVM'
+  when 'zfspool' then 'ZFS'
+  when 'cephfs', 'rbd' then 'CEPH'
+  when 'iscsi' then 'ISCSI'
+  else 'UNKNOWN'
+  end
+end
+
 end
