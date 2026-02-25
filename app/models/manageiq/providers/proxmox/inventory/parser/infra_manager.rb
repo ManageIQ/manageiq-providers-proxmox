@@ -50,7 +50,6 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
       puts "  - Storage: #{storage_data['storage']}"
       
       ems_ref = storage_data['storage']
-      storage_type = map_storage_type(storage_data['type'])
       
       location = case storage_data['type']
                 when 'nfs'
@@ -65,7 +64,7 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
       persister.storages.build(
         :ems_ref             => ems_ref,
         :name                => storage_data['storage'],
-        :store_type          => storage_type,
+        :store_type          => storage_data['plugintype'] || storage_data['content'],
         :storage_domain_type => storage_data['content'],
         :total_space         => total,
         :free_space          => total - used,
@@ -258,18 +257,5 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
     else ostype
     end
   end
-
-private
-
-  def map_storage_type(proxmox_type)
-    case proxmox_type
-    when 'dir' then 'DIR'
-    when 'nfs' then 'NFS'
-    when 'lvm' then 'LVM'
-    when 'lvmthin' then 'LVMTHIN'
-    when 'zfspool' then 'ZFS'
-    else proxmox_type&.upcase || 'UNKNOWN'
-    end
-end
 
 end
