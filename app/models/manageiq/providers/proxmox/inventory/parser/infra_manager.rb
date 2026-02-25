@@ -45,17 +45,15 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
   end
 
   def storages
-    collector.storages.each do |storage|
-      ems_ref = storage["id"].gsub("storage/", "")
-
-      storage_obj = persister.storages.build(
-        :ems_ref => ems_ref,
-        :name    => storage["storage"]
-      )
-
-      persister.host_storages.build(
-        :storage => storage_obj,
-        :host    => persister.hosts.lazy_find(storage["node"])
+    puts "Parsing #{collector.storages.size} storages..."
+    collector.storages.each do |storage_data|
+      puts "  - Storage: #{storage_data['storage']}"
+      persister.storages.build(
+        :ems_ref      => storage_data['storage'],
+        :name         => storage_data['storage'],
+        :store_type   => storage_data['plugintype'] || storage_data['content'],
+        :total_space  => storage_data['maxdisk'],
+        :free_space   => (storage_data['maxdisk'] || 0) - (storage_data['disk'] || 0)
       )
     end
   end
