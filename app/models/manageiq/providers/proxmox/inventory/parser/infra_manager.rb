@@ -46,31 +46,30 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
 
   def storages
     puts "Parsing #{collector.storages.size} storages..."
+    seen_storages = Set.new
+    
     collector.storages.each do |storage_data|
-      puts "  - Storage: #{storage_data['storage']}"
+      storage_name = storage_data['storage']
       
-      ems_ref = storage_data['storage']
+      # Skip if we've already processed this storage
+      next if seen_storages.include?(storage_name)
+      seen_storages.add(storage_name)
       
-      location = case storage_data['type']
-                when 'nfs'
-                  "#{storage_data['server']}:#{storage_data['path']}"
-                else
-                  storage_data['path'] || ems_ref
-                end
-
+      puts "  - Storage: #{storage_name}"
+      
+      ems_ref = storage_name
       total = storage_data['maxdisk'].to_i
       used = storage_data['disk'].to_i
       
       persister.storages.build(
         :ems_ref             => ems_ref,
-        :name                => storage_data['storage'],
-        :store_type          => storage_data['plugintype'] || storage_data['content'],
+        :name                => storage_name,
+        :store_type          => storage_data['plugintype'],
         :storage_domain_type => storage_data['content'],
         :total_space         => total,
         :free_space          => total - used,
         :uncommitted         => total - used,
-        :multiplehostaccess  => storage_data['shared'].to_i == 1,
-        :location            => location
+        :multiplehostaccess  => storage_data['shared'].to_i == 1
       )
     end
   end
