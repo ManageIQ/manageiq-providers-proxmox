@@ -14,7 +14,7 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Operations::Snapshot
           :id         => 'name',
           :label      => _('Name'),
           :isRequired => true,
-          :helperText => _('Must start with a letter and contain only letters, numbers, and underscores.'),
+          :helperText => _('Must start with a letter and contain only letters, numbers, and underscores'),
           :validate   => [
             {:type => 'required'},
             {:type => 'pattern', :pattern => '^[a-zA-Z][a-zA-Z0-9_]*$', :message => _('Must start with a letter and contain only letters, numbers, and underscores')}
@@ -34,7 +34,7 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Operations::Snapshot
           :onText     => _('Yes'),
           :offText    => _('No'),
           :isDisabled => current_state != 'on',
-          :helperText => _('Snapshotting the memory is only available if the VM is powered on.')
+          :helperText => _('Snapshotting the memory is only available if the VM is powered on')
         }
       ]
     }
