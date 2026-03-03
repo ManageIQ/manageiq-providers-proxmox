@@ -4,16 +4,34 @@ class ManageIQ::Providers::Proxmox::Inventory::Collector::TargetCollection < Man
     parse_targets!
   end
 
-  def cluster
-    @cluster ||= connection.request(:get, "/cluster/status")&.find { |item| item["type"] == "cluster" }
-  end
-
   def nodes
     return [] if references(:hosts).blank?
     return @nodes if @nodes
 
     all_nodes = connection.request(:get, "/nodes")
     @nodes = all_nodes.select { |n| references(:hosts).include?(n["node"]) }
+  end
+
+  def node_details
+    @node_details ||= begin
+      node_names = Set.new
+
+      nodes.each { |n| node_names << n["node"] }
+      vm_node_names.each { |name| node_names << name }
+
+      node_names.index_with do |node_name|
+        {
+          :status   => node_status(node_name),
+          :version  => node_version(node_name),
+          :ip       => node_ip(node_name),
+          :networks => node_networks(node_name)
+        }
+      end
+    end
+  end
+
+  def storages
+    @storages ||= cluster_resources_by_type["storage"] || []
   end
 
   def vms
@@ -28,18 +46,16 @@ class ManageIQ::Providers::Proxmox::Inventory::Collector::TargetCollection < Man
     end
   end
 
-  def storages
-    []
-  end
-
   def networks
-    []
+    @networks ||= cluster_resources_by_type["network"]
   end
 
   private
 
-  def connection
-    @connection ||= manager.connect
+  def vm_node_names
+    return [] if references(:vms).blank?
+
+    references(:vms).filter_map { |vm_ref| vm_ref.split("/").first }
   end
 
   def parse_targets!

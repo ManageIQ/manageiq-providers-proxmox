@@ -12,6 +12,10 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Refresher do
         assert_ems_counts
         assert_specific_cluster
         assert_specific_host
+        assert_specific_host_hardware
+        assert_specific_host_storages
+        assert_specific_host_networks
+        assert_specific_host_switches
         assert_specific_vm
         assert_specific_template
       end
@@ -72,15 +76,16 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Refresher do
     expect(Vm.count).to               eq(6)
     expect(MiqTemplate.count).to      eq(14)
     expect(Host.count).to             eq(2)
-    expect(Storage.count).to          eq(4)
+    expect(Storage.count).to          eq(5)
     expect(EmsCluster.count).to       eq(1)
+    expect(HostStorage.count).to      be >= 2
   end
 
   def assert_ems_counts
     expect(ems.vms.count).to           eq(6)
     expect(ems.miq_templates.count).to eq(14)
     expect(ems.hosts.count).to         eq(2)
-    expect(ems.storages.count).to      eq(4)
+    expect(ems.storages.count).to      eq(5)
     expect(ems.ems_clusters.count).to  eq(1)
   end
 
@@ -96,20 +101,79 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Refresher do
   def assert_specific_host
     host = ems.hosts.find_by(:ems_ref => "vmpvetest")
     expect(host).to have_attributes(
-      :name            => "vmpvetest",
-      :vmm_vendor      => "proxmox",
-      :vmm_version     => nil,
-      :vmm_product     => "Proxmox VE",
-      :vmm_buildnumber => nil,
-      :power_state     => "on",
-      :uid_ems         => "vmpvetest",
-      :ems_ref         => "vmpvetest",
-      :ems_cluster     => ems.ems_clusters.find_by(:ems_ref => "cluster")
+      :name             => "vmpvetest",
+      :hostname         => "vmpvetest",
+      :vmm_vendor       => "proxmox",
+      :vmm_version      => "9.1.5",
+      :vmm_product      => "Proxmox VE",
+      :vmm_buildnumber  => "80cf92a64bef6889",
+      :power_state      => "on",
+      :connection_state => "connected",
+      :uid_ems          => "vmpvetest",
+      :ems_ref          => "vmpvetest",
+      :ems_cluster      => ems.ems_clusters.find_by(:ems_ref => "cluster")
     )
+  end
+
+  def assert_specific_host_hardware
+    host = ems.hosts.find_by(:ems_ref => "vmpvetest")
     expect(host.hardware).to have_attributes(
-      :cpu_total_cores => 8,
-      :memory_mb       => 32_096
+      :cpu_total_cores      => 8,
+      :cpu_cores_per_socket => 8,
+      :cpu_sockets          => 1,
+      :memory_mb            => 32_096
     )
+    expect(host.hardware.cpu_type).to be_present
+    expect(host.hardware.cpu_speed).to be_present
+    expect(host.hardware.disk_capacity).to be_present
+  end
+
+  def assert_specific_host_storages
+    host = ems.hosts.find_by(:ems_ref => "vmpvetest")
+    expect(host.storages.count).to be >= 2
+    expect(host.host_storages.count).to be >= 2
+
+    # Test for a specific local storage
+    local_storage = host.storages.find_by(:location => "local")
+    expect(local_storage).to have_attributes(
+      :store_type         => "dir",
+      :multiplehostaccess => 0
+    )
+    expect(local_storage.name).to include("local")
+    expect(local_storage.total_space).to be_present
+    expect(local_storage.free_space).to be_present
+  end
+
+  def assert_specific_host_networks
+    host = ems.hosts.find_by(:ems_ref => "vmpvetest")
+    expect(host.hardware.guest_devices.where(:device_type => "ethernet").count).to be >= 1
+
+    # Test that network adapters have proper attributes
+    network_adapter = host.hardware.guest_devices.where(:device_type => "ethernet").first
+    expect(network_adapter).to have_attributes(
+      :controller_type => "ethernet",
+      :device_type     => "ethernet"
+    )
+    expect(network_adapter.device_name).to be_present
+    expect(network_adapter.uid_ems).to be_present
+  end
+
+  def assert_specific_host_switches
+    host = ems.hosts.find_by(:ems_ref => "vmpvetest")
+    expect(host.switches.count).to be >= 1
+
+    # Test for virtual bridge
+    switch = host.switches.first
+    expect(switch).to be_a(ManageIQ::Providers::Proxmox::InfraManager::HostVirtualSwitch)
+    expect(switch.name).to be_present
+    expect(switch.uid_ems).to be_present
+
+    # Test that the switch has associated VLANs
+    expect(switch.lans.count).to be >= 1
+
+    # Test host-switch relationship
+    host_switch = host.host_switches.first
+    expect(host_switch.switch).to eq(switch)
   end
 
   def assert_specific_vm
