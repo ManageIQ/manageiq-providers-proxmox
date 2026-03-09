@@ -1,6 +1,7 @@
 class ManageIQ::Providers::Proxmox::InfraManager < ManageIQ::Providers::InfraManager
   supports :create
   supports :refresh_ems
+  supports :provisioning
 
   def self.ems_type
     @ems_type ||= "proxmox".freeze
