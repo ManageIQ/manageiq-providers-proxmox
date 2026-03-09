@@ -19,6 +19,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "proxmox-sdk", "~> 0.1"
-  spec.add_development_dependency "manageiq-style"
+  spec.add_development_dependency "manageiq-style", "~> 1.5.0"
   spec.add_development_dependency "simplecov",  ">= 0.21.2"
 end
