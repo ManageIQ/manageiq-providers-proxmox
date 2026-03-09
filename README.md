@@ -1,6 +1,6 @@
 # ManageIQ::Providers::Proxmox
 
-[![CI](https://github.com/ManageIQ/manageiq-providers-proxmox/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/ManageIQ/manageiq-providers-proxmox/actions/workflows/ci.yaml)
+[![CI](https://github.com/ManageIQ/manageiq-providers-proxmox/actions/workflows/ci.yaml/badge.svg?branch=tal)](https://github.com/ManageIQ/manageiq-providers-proxmox/actions/workflows/ci.yaml)
 
 ManageIQ plugin for the Proxmox provider.
 
