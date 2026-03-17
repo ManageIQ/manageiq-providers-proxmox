@@ -192,6 +192,7 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Refresher do
 
     assert_specific_vm_hardware(vm)
     assert_specific_vm_disks(vm)
+    assert_specific_vm_storages(vm)
     assert_specific_vm_networks(vm)
     assert_specific_vm_os(vm)
   end
@@ -231,6 +232,14 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Refresher do
       :size            => 3_221_225_472,
       :location        => "scsi2"
     )
+  end
+
+  def assert_specific_vm_storages(vm)
+    expect(vm.storages.count).to be >= 1
+
+    storage = vm.storages.find_by(:location => "local-lvm")
+    expect(storage).to be_present
+    expect(storage.name).to include("local-lvm")
   end
 
   def assert_specific_vm_networks(vm)
