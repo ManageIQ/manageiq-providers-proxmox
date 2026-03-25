@@ -102,23 +102,27 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
       node_name = vm["node"]
 
       vm_obj = persister.vms_and_templates.build(
-        :type            => "#{persister.manager.class}::#{template ? "Template" : "Vm"}",
-        :ems_ref         => ems_ref,
-        :uid_ems         => ems_ref,
-        :name            => vm["name"],
-        :template        => template,
-        :raw_power_state => template ? "never" : (status["qmpstatus"] || vm["status"]),
-        :host            => persister.hosts.lazy_find(node_name),
-        :ems_cluster     => cluster,
-        :location        => "#{node_name}/#{vm["vmid"]}",
-        :vendor          => "proxmox",
-        :description     => config["description"],
-        :tools_status    => parse_tools_status(config, vm["agent_info"]),
-        :storages        => parse_storages(config, node_name)
+        :type                   => "#{persister.manager.class}::#{template ? "Template" : "Vm"}",
+        :ems_ref                => ems_ref,
+        :uid_ems                => ems_ref,
+        :name                   => vm["name"],
+        :template               => template,
+        :raw_power_state        => template ? "never" : (status["qmpstatus"] || vm["status"]),
+        :host                   => persister.hosts.lazy_find(node_name),
+        :ems_cluster            => cluster,
+        :location               => "#{node_name}/#{vm["vmid"]}",
+        :vendor                 => "proxmox",
+        :description            => config["description"],
+        :tools_status           => parse_tools_status(config, vm["agent_info"]),
+        :storages               => parse_storages(config, node_name),
+        :cpu_hot_add_enabled    => config["hotplug"]&.include?("cpu") || false,
+        :cpu_hot_remove_enabled => false,
+        :memory_hot_add_enabled => (config["hotplug"]&.include?("memory") && config["numa"].to_i == 1) || false
       )
 
       hardware = parse_hardware(vm_obj, config, status)
       parse_disks(hardware, config, node_name)
+      parse_nics(hardware, config, vm["vmid"], node_name)
       parse_networks(hardware, vm)
       parse_operating_system(vm_obj, vm["agent_info"], config)
       parse_snapshots(vm_obj, vm["snapshots"])
@@ -164,21 +168,31 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
   end
 
   def parse_hardware(vm_obj, config, status)
+    cores = config["cores"].to_i
+    sockets = config.fetch("sockets", 1).to_i
+
     persister.hardwares.build(
-      :vm_or_template  => vm_obj,
-      :cpu_total_cores => status["cpus"] || (config["cores"].to_i * config.fetch("sockets", 1).to_i),
-      :memory_mb       => (status["maxmem"] || (config["memory"].to_i * 1024 * 1024)) / 1024 / 1024,
-      :disk_capacity   => status["maxdisk"]
+      :vm_or_template       => vm_obj,
+      :cpu_total_cores      => status["cpus"] || (cores * sockets),
+      :cpu_cores_per_socket => cores.positive? ? cores : nil,
+      :cpu_sockets          => sockets.positive? ? sockets : nil,
+      :memory_mb            => (status["maxmem"] || (config["memory"].to_i * 1024 * 1024)) / 1024 / 1024,
+      :disk_capacity        => status["maxdisk"]
     )
   end
 
   def parse_disks(hardware, config, node_name)
     each_disk(config, node_name) do |disk_id, disk_str, storage_ems_ref|
+      storage_name = disk_str.split(":").first
+      thin_provisioned = detect_thin_provisioning(disk_str, storage_name, node_name)
+
       persister.disks.build(
         :hardware        => hardware,
         :device_name     => disk_id,
         :device_type     => "disk",
         :controller_type => disk_id.gsub(/\d+$/, ""),
+        :disk_type       => thin_provisioned ? "thin" : "thick",
+        :mode            => "persistent",
         :size            => parse_disk_size(disk_str),
         :location        => disk_id,
         :filename        => disk_str.split(",").first,
@@ -200,6 +214,50 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
 
       storage_name = disk_str.split(":").first
       yield disk_id, disk_str, storage_ems_ref_for(storage_name, node_name)
+    end
+  end
+
+  def parse_nics(hardware, config, vmid, node_name)
+    nic_keys = config.keys.grep(/^net\d+$/)
+
+    nic_keys.each do |nic_id|
+      nic_str = config[nic_id]
+      mac = parse_mac(nic_str)
+      model = nic_str.split(",").first
+      bridge = nic_str[/bridge=([^,]+)/, 1] || "vmbr0"
+
+      switch = persister.host_virtual_switches.lazy_find(:host => persister.hosts.lazy_find(node_name), :uid_ems => bridge)
+      lan = persister.host_virtual_lans.lazy_find(:switch => switch, :uid_ems => bridge)
+
+      persister.guest_devices.build(
+        :hardware        => hardware,
+        :uid_ems         => "#{vmid}-#{nic_id}",
+        :device_name     => "#{nic_id} (#{bridge})",
+        :device_type     => "ethernet",
+        :controller_type => "ethernet",
+        :location        => nic_id,
+        :address         => mac,
+        :model           => model,
+        :present         => true,
+        :start_connected => true,
+        :lan             => lan
+      )
+    end
+  end
+
+  def detect_thin_provisioning(disk_str, storage_name, node_name)
+    storage_info = collector.storages_by_name["#{node_name}/#{storage_name}"]
+    return true unless storage_info
+
+    storage_type = storage_info["plugintype"].to_s.downcase
+
+    case storage_type
+    when /lvmthin/, /thin/
+      true
+    when /dir/, /nfs/, /cifs/, /smb/
+      disk_str.include?("qcow2") || disk_str.exclude?("raw")
+    else
+      false
     end
   end
 
