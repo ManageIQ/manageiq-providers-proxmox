@@ -93,7 +93,7 @@ class ManageIQ::Providers::Proxmox::InfraManager::Provision < MiqProvision
   end
 
   def check_task_status(upid)
-    node_id = phase_context[:clone_node_id]
+    node_id = upid.split(":")[1].presence || phase_context[:clone_node_id]
     with_provider_connection do |connection|
       status = connection.request(:get, "/nodes/#{node_id}/tasks/#{URI.encode_uri_component(upid)}/status")
       $proxmox_log.info("Task #{upid}: #{status['status']} (exit: #{status['exitstatus']})")

@@ -47,6 +47,7 @@ module ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning
     $proxmox_log.info("customize_cloned_vm options: #{options.inspect}")
     with_provider_connection do |connection|
       apply_hardware_customization(connection, node_id, new_vmid)
+      resize_boot_disk(connection, node_id, new_vmid)
       handle_tpm_rekey(connection, node_id, new_vmid) if get_option(:renew_tpm)
     end
   end
