@@ -37,6 +37,17 @@
     :service:
       :description: Catalog
       :fields:
+        :src_vm_id:
+          :values_from:
+            :options:
+              :tag_filters: []
+            :method: :allowed_templates
+          :description: Name
+          :required: true
+          :notes:
+          :display: :edit
+          :data_type: :integer
+          :notes_display: :show
         :number_of_vms:
           :values_from:
             :options:

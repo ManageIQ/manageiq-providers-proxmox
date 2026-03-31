@@ -23,7 +23,7 @@ class ManageIQ::Providers::Proxmox::InfraManager::ProvisionWorkflow < ManageIQ::
   end
 
   def dialog_name_from_automate(message = 'get_dialog_name', extra_attrs = {})
-    super(message, extra_attrs)
+    super(message, extra_attrs.reverse_merge('platform' => 'proxmox'))
   end
 
   def update_field_visibility(_options = {})
@@ -48,10 +48,8 @@ class ManageIQ::Providers::Proxmox::InfraManager::ProvisionWorkflow < ManageIQ::
     (1..50).index_with(&:to_s)
   end
 
-  def allowed_templates(_options = {})
-    return {} unless @ems
-
-    @ems.miq_templates.each_with_object({}) { |t, h| h[t.id] = t.name }
+  def self.provider_model
+    ManageIQ::Providers::Proxmox::InfraManager
   end
 
   def allowed_disk_formats(_options = {})
