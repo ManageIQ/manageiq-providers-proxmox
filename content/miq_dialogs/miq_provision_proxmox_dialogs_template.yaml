@@ -189,7 +189,7 @@
           :required: false
           :display: :edit
           :data_type: :string
-          :notes: 'JSON object of additional Proxmox VM config keys, e.g. {"tags":"prod,web","onboot":1}. Standard dialog fields take precedence over any overlapping keys.'
+          :notes: 'JSON object of Proxmox VM config keys, e.g. {"tags":"prod","onboot":1}. Dialog fields take precedence.'
           :notes_display: :show
       :display: :show
       :field_order:
