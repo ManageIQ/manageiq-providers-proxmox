@@ -184,6 +184,13 @@
           :display: :edit
           :default: true
           :data_type: :boolean
+        :extra_config:
+          :description: Extra Config (JSON)
+          :required: false
+          :display: :edit
+          :data_type: :string
+          :notes: 'JSON object of additional Proxmox VM config keys, e.g. {"tags":"prod,web","onboot":1}. Standard dialog fields take precedence over any overlapping keys.'
+          :notes_display: :show
       :display: :show
       :field_order:
     :schedule:

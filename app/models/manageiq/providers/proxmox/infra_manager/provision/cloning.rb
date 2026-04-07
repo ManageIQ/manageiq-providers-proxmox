@@ -60,7 +60,9 @@ module ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning
     memory  = get_option(:vm_memory).to_i
     bridge  = get_option(:vlan)
 
-    params = {}
+    # Seed params from extra_config first; explicit dialog fields override on conflict.
+    params = parse_extra_config
+
     params[:sockets] = sockets if sockets > 0
     params[:cores]   = cores   if cores   > 0
     params[:memory]  = memory  if memory  > 0
@@ -163,6 +165,23 @@ module ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning
 
     host = Host.find_by(:id => host_id)
     host&.ems_ref
+  end
+
+  # Parses the :extra_config option, which returns a symbol-keyed hash ready to be merged into the config params.
+  def parse_extra_config
+    raw = get_option(:extra_config).to_s.strip
+    return {} if raw.blank?
+
+    parsed = JSON.parse(raw)
+    unless parsed.kind_of?(Hash)
+      $proxmox_log.warn("extra_config is not a JSON object — ignoring: #{raw.inspect}")
+      return {}
+    end
+
+    parsed.transform_keys(&:to_sym)
+  rescue JSON::ParserError => e
+    $proxmox_log.warn("extra_config contains invalid JSON — ignoring: #{e.message}")
+    {}
   end
 
   def build_clone_params(new_vmid, clone_opts, dest_node_id = nil, src_node_id = nil)
