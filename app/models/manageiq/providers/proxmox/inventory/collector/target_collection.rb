@@ -39,15 +39,34 @@ class ManageIQ::Providers::Proxmox::Inventory::Collector::TargetCollection < Man
   end
 
   def vms
-    return [] if references(:vms).blank?
-    return @vms if @vms
+    return @vms if defined?(@vms)
 
-    @vms = references(:vms).filter_map do |vm_ref|
-      node, vmid = vm_ref.split("/")
-      next unless node && vmid
+    @vms = if references(:vms).present?
+             references(:vms).filter_map do |vm_ref|
+               if vm_ref.include?("/")
+                 node, vmid = vm_ref.split("/")
+                 next unless node && vmid
 
-      collect_vm_details("node" => node, "vmid" => vmid, "id" => "qemu/#{vmid}")
-    end
+                 collect_vm_details("node" => node, "vmid" => vmid, "id" => "qemu/#{vmid}")
+               else
+                 find_vm_by_vmid(vm_ref)
+               end
+             end
+           elsif references(:hosts).present?
+             # Host-targeted refresh: collect all VMs on the targeted nodes
+             (cluster_resources_by_type["qemu"] || [])
+               .select { |vm| references(:hosts).include?(vm["node"]) }
+               .map { |vm| collect_vm_details(vm) }
+           else
+             []
+           end
+  end
+
+  def find_vm_by_vmid(vmid)
+    vm = (cluster_resources_by_type["qemu"] || []).find { |v| v["vmid"].to_s == vmid.to_s }
+    return unless vm
+
+    collect_vm_details("node" => vm["node"], "vmid" => vmid, "id" => "qemu/#{vmid}")
   end
 
   def networks
@@ -57,14 +76,18 @@ class ManageIQ::Providers::Proxmox::Inventory::Collector::TargetCollection < Man
   private
 
   def vm_node_names
-    return [] if references(:vms).blank?
-
-    references(:vms).filter_map { |vm_ref| vm_ref.split("/").first }
+    vms.filter_map { |vm| vm["node"] }
   end
 
   def parse_targets!
-    target.targets.each do |t|
+    snapshot = target.targets.dup
+    snapshot.each do |t|
       case t
+      when InventoryRefresh::Target
+        case t.association
+        when :vms_and_templates, :vms
+          add_target!(:vms, t.manager_ref[:ems_ref])
+        end
       when Vm
         add_target!(:vms, t.location)
       when Host

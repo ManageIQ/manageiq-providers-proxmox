@@ -55,6 +55,10 @@ class ManageIQ::Providers::Proxmox::Inventory::Collector < ManageIQ::Providers::
     end
 
     vm.merge(details)
+  rescue RuntimeError => err
+    # Return nil when VM does no longer exists for eg target refresh.
+    $proxmox_log.info("VM #{vm["vmid"]} on #{vm["node"]} no longer exists, skipping: #{err.message}")
+    nil
   end
 
   # Node-related helper methods shared across collectors
