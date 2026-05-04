@@ -295,4 +295,2127 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"data":[{"type":"qemu","uptime":1211050,"mem":744161280,"maxdisk":10737418240,"memhost":1035333632,"diskwrite":2020364800,"disk":0,"name":"vmpvevm1","node":"vmpvetest","netout":360167,"cpu":0.0742228711804758,"diskread":520360448,"id":"qemu/100","maxmem":2147483648,"status":"running","vmid":100,"template":0,"maxcpu":4,"netin":88719357013044},{"memhost":0,"diskwrite":0,"disk":0,"name":"vmpvevm3","type":"qemu","uptime":0,"mem":0,"maxdisk":0,"template":0,"maxcpu":2,"netin":0,"node":"vmpvetest2","cpu":0,"netout":0,"diskread":0,"id":"qemu/101","maxmem":1073741824,"status":"stopped","vmid":101},{"diskwrite":40666029568,"name":"vmpvevm2","disk":0,"memhost":4339761152,"mem":2138906624,"maxdisk":32212254720,"type":"qemu","uptime":1211049,"netin":88706868876587,"maxcpu":2,"template":0,"maxmem":4294967296,"status":"running","vmid":104,"id":"qemu/104","cpu":0.238165696535153,"netout":137823152,"node":"vmpvetest","diskread":19642437632},{"type":"qemu","uptime":0,"mem":0,"maxdisk":32212254720,"memhost":0,"diskwrite":0,"disk":0,"name":"win2025","node":"vmpvetest2","cpu":0,"netout":0,"diskread":0,"id":"qemu/105","vmid":105,"maxmem":4294967296,"status":"stopped","template":0,"netin":0,"maxcpu":2},{"id":"qemu/106","maxmem":4294967296,"vmid":106,"status":"stopped","diskread":0,"node":"vmpvetest2","netout":0,"cpu":0,"netin":0,"maxcpu":2,"template":0,"maxdisk":32212254720,"mem":0,"uptime":0,"type":"qemu","disk":0,"name":"win2025-full","diskwrite":0,"memhost":0},{"memhost":0,"name":"vmpvevm11","disk":0,"diskwrite":0,"uptime":0,"type":"qemu","maxdisk":10737418240,"mem":0,"template":0,"maxcpu":2,"netin":0,"diskread":0,"netout":0,"cpu":0,"node":"vmpvetest","maxmem":1073741824,"vmid":110,"status":"stopped","id":"qemu/110"},{"memhost":0,"disk":0,"name":"debian-13-2025-11-17T19-50-19Z-00000000","diskwrite":0,"uptime":0,"type":"qemu","maxdisk":10737418240,"mem":0,"template":1,"netin":0,"maxcpu":2,"diskread":0,"node":"vmpvetest","cpu":0,"netout":0,"id":"qemu/900","status":"stopped","maxmem":1073741824,"vmid":900},{"diskwrite":0,"disk":0,"name":"debian-12-2025-11-17T19-50-19Z-00000000","memhost":0,"mem":0,"maxdisk":10737418240,"type":"qemu","uptime":0,"netin":0,"maxcpu":2,"template":1,"id":"qemu/901","maxmem":1073741824,"status":"stopped","vmid":901,"node":"vmpvetest","cpu":0,"netout":0,"diskread":0},{"diskwrite":0,"disk":0,"name":"windows-server-2022-2025-11-17T19-55-23Z-00000000","memhost":0,"mem":0,"maxdisk":32212254720,"type":"qemu","uptime":0,"netin":0,"maxcpu":2,"template":1,"id":"qemu/902","vmid":902,"maxmem":4294967296,"status":"stopped","node":"vmpvetest","netout":0,"cpu":0,"diskread":0},{"netin":0,"maxcpu":2,"template":1,"id":"qemu/903","maxmem":4294967296,"vmid":903,"status":"stopped","diskread":0,"node":"vmpvetest","netout":0,"cpu":0,"disk":0,"name":"windows-server-2025-2025-11-17T19-55-23Z-00000000","diskwrite":0,"memhost":0,"maxdisk":32212254720,"mem":0,"uptime":0,"type":"qemu"},{"memhost":0,"diskwrite":0,"name":"windows-server-2019-2025-11-17T19-55-23Z-00000000","disk":0,"type":"qemu","uptime":0,"mem":0,"maxdisk":32212254720,"template":1,"netin":0,"maxcpu":2,"netout":0,"cpu":0,"node":"vmpvetest","diskread":0,"maxmem":4294967296,"vmid":904,"status":"stopped","id":"qemu/904"},{"mem":0,"maxdisk":32212254720,"type":"qemu","uptime":0,"diskwrite":0,"disk":0,"name":"windows-server-2016-2025-11-17T19-55-23Z-00000000","memhost":0,"id":"qemu/905","maxmem":4294967296,"status":"stopped","vmid":905,"node":"vmpvetest","cpu":0,"netout":0,"diskread":0,"netin":0,"maxcpu":2,"template":1},{"id":"qemu/906","maxmem":4294967296,"vmid":906,"status":"stopped","diskread":0,"node":"vmpvetest","cpu":0,"netout":0,"netin":0,"maxcpu":2,"template":1,"maxdisk":32212254720,"mem":0,"uptime":0,"type":"qemu","disk":0,"name":"windows-11-23h2-2025-11-17T19-55-23Z-00000000","diskwrite":0,"memhost":0},{"memhost":0,"diskwrite":0,"disk":0,"name":"windows-10-ltsc-2019-2025-11-17T19-55-23Z-00000000","type":"qemu","uptime":0,"mem":0,"maxdisk":32212254720,"template":1,"netin":0,"maxcpu":2,"node":"vmpvetest","netout":0,"cpu":0,"diskread":0,"id":"qemu/907","vmid":907,"maxmem":4294967296,"status":"stopped"},{"name":"windows-10-iot-ltsc-2021-2025-11-17T19-55-23Z-00000000","disk":0,"diskwrite":0,"memhost":0,"maxdisk":32212254720,"mem":0,"uptime":0,"type":"qemu","netin":0,"maxcpu":2,"template":1,"vmid":908,"maxmem":4294967296,"status":"stopped","id":"qemu/908","diskread":0,"netout":0,"cpu":0,"node":"vmpvetest"},{"template":1,"maxcpu":2,"netin":0,"node":"vmpvetest","netout":0,"cpu":0,"diskread":0,"id":"qemu/909","status":"stopped","maxmem":4294967296,"vmid":909,"memhost":0,"diskwrite":0,"disk":0,"name":"windows-11-24h2-2025-11-17T19-55-23Z-00000000","type":"qemu","uptime":0,"mem":0,"maxdisk":32212254720},{"maxmem":4294967296,"vmid":910,"status":"stopped","id":"qemu/910","netout":0,"cpu":0,"node":"vmpvetest","diskread":0,"maxcpu":2,"netin":0,"template":1,"mem":0,"maxdisk":32212254720,"type":"qemu","uptime":0,"diskwrite":0,"name":"windows-11-25h2-2025-11-17T19-55-23Z-00000000","disk":0,"memhost":0},{"type":"qemu","uptime":0,"mem":0,"maxdisk":32212254720,"memhost":0,"diskwrite":0,"name":"windows-11-iot-ltsc-2024-2025-11-17T19-55-23Z-00000000","disk":0,"netout":0,"cpu":0,"node":"vmpvetest","diskread":0,"maxmem":4294967296,"vmid":911,"status":"stopped","id":"qemu/911","template":1,"maxcpu":2,"netin":0},{"node":"vmpvetest","netout":0,"cpu":0,"diskread":0,"id":"qemu/912","maxmem":4294967296,"status":"stopped","vmid":912,"template":1,"maxcpu":2,"netin":0,"type":"qemu","uptime":0,"mem":0,"maxdisk":32212254720,"memhost":0,"diskwrite":0,"disk":0,"name":"windows-10-ltsb-2016-2025-11-18T10-42-30Z-00000000"},{"mem":0,"maxdisk":8589934592,"type":"lxc","uptime":0,"diskwrite":0,"name":"cttest1","disk":0,"memhost":0,"status":"stopped","maxmem":536870912,"vmid":913,"id":"lxc/913","cpu":0,"netout":0,"node":"vmpvetest","diskread":0,"maxcpu":1,"netin":0,"template":0},{"template":1,"maxcpu":2,"netin":0,"diskread":0,"node":"vmpvetest2","cpu":0,"netout":0,"id":"qemu/963","vmid":963,"maxmem":4294967296,"status":"stopped","memhost":0,"disk":0,"name":"windows-server-2025-2025-11-17T19-55-23Z-00000000","diskwrite":0,"uptime":0,"type":"qemu","maxdisk":32212254720,"mem":0},{"maxcpu":8,"id":"node/vmpvetest2","status":"online","maxmem":33655611392,"node":"vmpvetest2","cpu":0.00567250724820371,"disk":4558422016,"cgroup-mode":2,"level":"c","maxdisk":1002980507648,"mem":3316146176,"uptime":1211311,"type":"node"},{"id":"node/vmpvetest","maxmem":33655615488,"status":"online","node":"vmpvetest","cpu":0.0896809427996551,"maxcpu":8,"mem":8320557056,"maxdisk":100861726720,"type":"node","uptime":1211319,"disk":90838827008,"cgroup-mode":2,"level":"c"},{"disk":0,"shared":1,"type":"storage","node":"vmpvetest2","content":"images","status":"available","maxdisk":16827805696,"storage":"shared1","id":"storage/vmpvetest2/shared1","plugintype":"dir"},{"storage":"shared1","maxdisk":16827809792,"id":"storage/vmpvetest/shared1","status":"available","plugintype":"dir","shared":1,"node":"vmpvetest","content":"images","type":"storage","disk":0},{"shared":0,"type":"storage","content":"rootdir,images","node":"vmpvetest","status":"available","storage":"local-lvm","maxdisk":950194405376,"id":"storage/vmpvetest/local-lvm","plugintype":"lvmthin","disk":164858729332},{"shared":0,"content":"vztmpl,backup,iso","node":"vmpvetest2","type":"storage","storage":"local","maxdisk":1012126056448,"id":"storage/vmpvetest2/local","status":"available","plugintype":"dir","disk":13703970816},{"type":"storage","node":"vmpvetest","content":"vztmpl,backup,iso","shared":0,"plugintype":"dir","status":"available","storage":"local","maxdisk":100861726720,"id":"storage/vmpvetest/local","disk":90838827008},{"disk":40355315712,"type":"storage","node":"vmpvetest2","content":"images,rootdir","shared":0,"plugintype":"zfspool","status":"available","maxdisk":1038777442304,"storage":"local-zfs","id":"storage/vmpvetest2/local-zfs"},{"node":"vmpvetest2","type":"network","id":"network/vmpvetest2/zone/localnetwork","network":"localnetwork","status":"ok","network-type":"zone"},{"type":"network","node":"vmpvetest","network-type":"zone","status":"ok","id":"network/vmpvetest/zone/localnetwork","network":"localnetwork"}]}'
   recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/100/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"sockets":1,"digest":"bce0e3e3e046c4ae9ddd8314556f28efe527f16d","description":"Build
+        date: 2025-11-17T19:50:19Z","name":"vmpvevm1","scsi2":"local-lvm:vm-100-disk-4,size=3G","scsi0":"local-lvm:vm-100-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=10G,ssd=1","kvm":1,"efidisk0":"local-lvm:vm-100-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","tpmstate0":"local-lvm:vm-100-disk-2,size=4M,version=v2.0","machine":"q35","cores":4,"agent":"1","ostype":"l26","vga":"virtio","parent":"dfsdf3","cpu":"host","net0":"virtio=BC:24:11:E2:9F:14,bridge=vmbr0","onboot":0,"smbios1":"uuid=945505a5-1a05-4e36-b571-5dcc38e45204","memory":"2048","vmgenid":"28861f12-1817-4999-84d2-92f0c1c22814","bios":"ovmf","scsi1":"local-lvm:vm-100-disk-3,size=2G","scsihw":"virtio-scsi-single","numa":0,"boot":"order=scsi0","meta":"creation-qemu=10.1.2,ctime=1763409034"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/100/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"vmid":100,"cpu":0.0891622888818386,"status":"running","running-qemu":"10.1.2","memhost":1035603968,"freemem":1305227264,"netin":88719273434813,"ha":{"managed":0},"qmpstatus":"running","disk":0,"cpus":4,"maxdisk":10737418240,"balloon":2147483648,"pid":1234,"uptime":1211050,"mem":744161280,"name":"vmpvevm1","maxmem":2147483648,"agent":1,"diskread":520360448,"diskwrite":2020364800,"netout":360167}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/100/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"parent":"cg4","vmstate":1,"snaptime":1770739824,"name":"cg5","description":"f"},{"description":"2","name":"teststest","snaptime":1768984614,"vmstate":0,"parent":"tests"},{"description":"t5","name":"testtt","snaptime":1768982659,"parent":"test","vmstate":0},{"description":"4","name":"tests","snaptime":1768983093,"vmstate":0,"parent":"testtt"},{"description":"","name":"tes1","snaptime":1768919973,"vmstate":1},{"vmstate":1,"parent":"tes1","snaptime":1768919987,"name":"t2","description":""},{"vmstate":0,"parent":"cg5","snaptime":1770741697,"name":"dfsdf3","description":"sdf"},{"name":"test","description":"t3","parent":"tes1","vmstate":0,"snaptime":1768929715},{"name":"cg4","description":"tsf","vmstate":1,"parent":"teststest","snaptime":1770737403},{"description":"You
+        are here!","name":"current","running":1,"digest":"bce0e3e3e046c4ae9ddd8314556f28efe527f16d","parent":"dfsdf3"}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/100/agent/get-osinfo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"result":{"machine":"x86_64","pretty-name":"Debian GNU/Linux
+        13 (trixie)","name":"Debian GNU/Linux","kernel-version":"#1 SMP PREEMPT_DYNAMIC
+        Debian 6.12.69-1 (2026-02-08)","id":"debian","version-id":"13","kernel-release":"6.12.69+deb13-cloud-amd64","version":"13
+        (trixie)"}}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/100/agent/network-get-interfaces
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"result":[{"statistics":{"tx-packets":80,"tx-errs":0,"tx-dropped":0,"rx-errs":0,"rx-packets":80,"rx-dropped":0,"tx-bytes":8764,"rx-bytes":8764},"hardware-address":"00:00:00:00:00:00","name":"lo","ip-addresses":[{"ip-address-type":"ipv4","ip-address":"192.0.2.1","prefix":8},{"prefix":128,"ip-address":"::1","ip-address-type":"ipv6"}]},{"hardware-address":"bc:24:11:e2:9f:14","name":"ens18","statistics":{"tx-bytes":360167,"rx-bytes":88719307959480,"tx-dropped":0,"tx-packets":3935,"tx-errs":0,"rx-dropped":1620,"rx-packets":8905015122,"rx-errs":0},"ip-addresses":[{"ip-address-type":"ipv4","prefix":24,"ip-address":"192.0.2.253"}]},{"ip-addresses":[{"prefix":24,"ip-address":"192.0.2.1","ip-address-type":"ipv4"}],"statistics":{"rx-bytes":0,"tx-bytes":0,"rx-errs":0,"rx-packets":0,"rx-dropped":0,"tx-packets":0,"tx-errs":0,"tx-dropped":2},"hardware-address":"36:47:a9:61:14:2a","name":"docker0"}]}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/100/agent/get-host-name
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"result":{"host-name":"vmpvevm1"}}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/104/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"boot":"order=scsi0","meta":"creation-qemu=10.1.2,ctime=1763398274","onboot":0,"smbios1":"uuid=82178776-0aba-41c8-8d1c-9d26a860b6d9","vmgenid":"2f46d3e1-e9f1-497e-a690-707e8684e220","memory":"4096","scsihw":"virtio-scsi-single","numa":0,"bios":"ovmf","ostype":"win10","vga":"std","cpu":"host","net0":"virtio=BC:24:11:1E:61:F7,bridge=vmbr0","digest":"eb03208c1c28da72520be61a922fbb5664e04ad7","description":"Build
+        date: 2025-11-17T16:50:33Z","sockets":1,"name":"vmpvevm2","tpmstate0":"local-lvm:vm-104-disk-2,size=4M,version=v2.0","kvm":1,"scsi0":"local-lvm:vm-104-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=30G,ssd=1","efidisk0":"local-lvm:vm-104-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","agent":"1","cores":2,"machine":"pc-q35-10.1"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/104/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"vmid":104,"cpu":0.294883838353234,"status":"running","running-qemu":"10.1.2","memhost":4339494912,"netin":88706843660353,"ha":{"managed":0},"qmpstatus":"running","disk":0,"cpus":2,"maxdisk":32212254720,"balloon":4294967296,"pid":2189,"uptime":1211049,"mem":2138906624,"name":"vmpvevm2","maxmem":4294967296,"agent":1,"diskread":19642437632,"diskwrite":40666029568,"netout":137823152}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/104/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"digest":"eb03208c1c28da72520be61a922fbb5664e04ad7","running":1,"name":"current","description":"You
+        are here!"}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/104/agent/get-osinfo
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"result":{"variant-id":"server","version":"Microsoft Windows
+        Server 2022","kernel-release":"20348","version-id":"2022","id":"mswindows","kernel-version":"10.0","variant":"server","name":"Microsoft
+        Windows","pretty-name":"Windows Server 2022 Datacenter","machine":"x86_64"}}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/104/agent/network-get-interfaces
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"result":[{"hardware-address":"bc:24:11:1e:61:f7","name":"Ethernet","statistics":{"tx-bytes":72099422,"rx-bytes":82446844742663,"tx-dropped":0,"tx-packets":220713,"tx-errs":0,"rx-dropped":2087577,"rx-errs":0,"rx-packets":62509264342},"ip-addresses":[{"prefix":24,"ip-address":"192.0.2.78","ip-address-type":"ipv4"}]},{"ip-addresses":[{"ip-address-type":"ipv6","prefix":128,"ip-address":"::1"},{"prefix":8,"ip-address":"192.0.2.1","ip-address-type":"ipv4"}],"statistics":{"tx-packets":0,"tx-errs":0,"tx-dropped":0,"rx-errs":0,"rx-packets":0,"rx-dropped":0,"tx-bytes":0,"rx-bytes":0},"name":"Loopback
+        Pseudo-Interface 1"}]}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/104/agent/get-host-name
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"result":{"host-name":"VMPVEVM2"}}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/110/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"meta":"creation-qemu=10.1.2,ctime=1763409034","boot":"order=scsi0;sata0","scsihw":"virtio-scsi-single","numa":0,"bios":"ovmf","vmgenid":"ab55580f-3134-40d7-8f54-8f0743e6e51f","net1":"virtio=BC:24:11:63:61:75,bridge=vmbr2,firewall=1,tag=1","memory":"1024","smbios1":"uuid=0d6ce3e2-2a00-4602-9141-c7c9e6945817","onboot":1,"net0":"virtio=BC:24:11:F4:67:91,bridge=vmbr1","cpu":"host","parent":"t5","vga":"type=virtio,memory=16","ostype":"l26","agent":"1","machine":"q35","cores":2,"tpmstate0":"local-lvm:vm-110-disk-2,size=4M,version=v2.0","kvm":1,"scsi0":"local-lvm:vm-110-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=10G,ssd=1","efidisk0":"local-lvm:vm-110-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","name":"vmpvevm11","description":"Build
+        date: 2025-11-17T19:50:19Z","digest":"8925f5c5175191b02944471617d3235c7f2a328f","sockets":1}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/110/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"clipboard":null,"uptime":0,"mem":0,"name":"vmpvevm11","maxmem":1073741824,"vmid":110,"status":"stopped","cpu":0,"memhost":0,"agent":1,"ha":{"managed":0},"qmpstatus":"stopped","disk":0,"netout":0,"spice":1,"maxdisk":10737418240,"cpus":2,"netin":0}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/110/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"description":"t5","name":"t5","snaptime":1771325521,"vmstate":0},{"vmstate":1,"parent":"t5","snaptime":1771325536,"name":"t6","description":"g"},{"running":0,"digest":"8925f5c5175191b02944471617d3235c7f2a328f","parent":"t5","description":"You
+        are here!","name":"current"}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/900/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"meta":"creation-qemu=10.1.2,ctime=1763409034","template":1,"boot":"order=scsi0;sata0","bios":"ovmf","scsihw":"virtio-scsi-single","numa":0,"memory":"1024","vmgenid":"8dcd2af4-eb93-4d87-ac6b-ea7710de91be","smbios1":"uuid=9801f30c-50ff-4904-be0d-6ffac21e85ce","onboot":0,"net0":"virtio=4A:0A:DC:DA:8A:DA,bridge=vmbr1","cpu":"host","vga":"type=virtio,memory=16","ostype":"l26","machine":"q35","cores":2,"agent":"1","kvm":1,"scsi0":"local-lvm:base-900-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=10G,ssd=1","efidisk0":"local-lvm:base-900-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","tpmstate0":"local-lvm:base-900-disk-2,size=4M,version=v2.0","name":"debian-13-2025-11-17T19-50-19Z-00000000","sockets":1,"description":"Build
+        date: 2025-11-17T19:50:19Z","digest":"c567aced844454c4c9a37e2d60bae9fc0e440a27"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/900/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"cpus":2,"netin":0,"template":1,"maxdisk":10737418240,"netout":0,"spice":1,"ha":{"managed":0},"qmpstatus":"stopped","disk":0,"memhost":0,"agent":1,"cpu":0,"status":"stopped","vmid":900,"clipboard":null,"uptime":0,"name":"debian-13-2025-11-17T19-50-19Z-00000000","maxmem":1073741824,"mem":0}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/900/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"digest":"c567aced844454c4c9a37e2d60bae9fc0e440a27","running":0,"name":"current","description":"You
+        are here!"}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/901/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"cpu":"host","net0":"virtio=BA:09:00:8E:CA:0A,bridge=vmbr1","ostype":"l26","vga":"type=virtio,memory=16","tpmstate0":"local-lvm:base-901-disk-2,size=4M,version=v2.0","efidisk0":"local-lvm:base-901-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","kvm":1,"scsi0":"local-lvm:base-901-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=10G,ssd=1","agent":"1","cores":2,"machine":"q35","description":"Build
+        date: 2025-11-17T19:50:19Z","digest":"d1beed64a05521d7f5d62c19267dd3f2d774a25c","sockets":1,"name":"debian-12-2025-11-17T19-50-19Z-00000000","boot":"order=scsi0;sata0","template":1,"meta":"creation-qemu=10.1.2,ctime=1763409034","vmgenid":"50aadc29-9cee-402e-8f25-6551b9ce271d","memory":"1024","numa":0,"scsihw":"virtio-scsi-single","bios":"ovmf","onboot":0,"smbios1":"uuid=e717c7a5-c280-445e-ad72-6e47a9699144"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/901/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"vmid":901,"status":"stopped","cpu":0,"memhost":0,"agent":1,"uptime":0,"clipboard":null,"mem":0,"name":"debian-12-2025-11-17T19-50-19Z-00000000","maxmem":1073741824,"maxdisk":10737418240,"cpus":2,"template":1,"netin":0,"ha":{"managed":0},"qmpstatus":"stopped","disk":0,"netout":0,"spice":1}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/901/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"name":"current","description":"You are here!","digest":"d1beed64a05521d7f5d62c19267dd3f2d774a25c","running":0}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/902/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"template":1,"boot":"order=scsi0","meta":"creation-qemu=10.1.2,ctime=1763409374","onboot":0,"smbios1":"uuid=994485e9-b284-4cb4-a304-58e19a4b1696","vmgenid":"c6e48081-b255-40bd-b0fa-0412ed95033a","memory":"4096","numa":0,"scsihw":"virtio-scsi-single","bios":"ovmf","ostype":"win10","vga":"type=std,memory=16","cpu":"host","net0":"virtio=96:78:EE:6C:33:85,bridge=vmbr1","description":"Build
+        date: 2025-11-17T19:55:23Z","digest":"791ede78d656a66ec60e4225af5c14a9d7aae17d","sockets":1,"name":"windows-server-2022-2025-11-17T19-55-23Z-00000000","tpmstate0":"local-lvm:base-902-disk-2,size=4M,version=v2.0","efidisk0":"local-lvm:base-902-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","scsi0":"local-lvm:base-902-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=30G,ssd=1","kvm":1,"agent":"1","machine":"pc-q35-10.1","cores":2}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/902/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"cpus":2,"template":1,"netin":0,"maxdisk":32212254720,"netout":0,"qmpstatus":"stopped","ha":{"managed":0},"disk":0,"agent":1,"memhost":0,"vmid":902,"status":"stopped","cpu":0,"clipboard":null,"uptime":0,"mem":0,"maxmem":4294967296,"name":"windows-server-2022-2025-11-17T19-55-23Z-00000000"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/902/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"digest":"791ede78d656a66ec60e4225af5c14a9d7aae17d","running":0,"name":"current","description":"You
+        are here!"}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/903/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"smbios1":"uuid=f99c0a2d-0b93-4795-92bc-6efa08506b25","onboot":0,"bios":"ovmf","numa":0,"scsihw":"virtio-scsi-single","memory":"4096","vmgenid":"565dd5b9-a34c-4d07-8193-fc785dfcf298","meta":"creation-qemu=10.1.2,ctime=1763409392","template":1,"boot":"order=scsi0","name":"windows-server-2025-2025-11-17T19-55-23Z-00000000","sockets":1,"description":"Build
+        date: 2025-11-17T19:55:23Z","digest":"c13fd275a782dd7c8da17e79fe99f02377ea036d","cores":2,"machine":"pc-q35-10.1","agent":"1","efidisk0":"local-lvm:base-903-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","kvm":1,"scsi0":"local-lvm:base-903-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=30G,ssd=1","tpmstate0":"local-lvm:base-903-disk-2,size=4M,version=v2.0","vga":"type=std,memory=16","ostype":"win10","net0":"virtio=5E:8D:FB:4F:B5:60,bridge=vmbr1","cpu":"host"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/903/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"memhost":0,"agent":1,"status":"stopped","cpu":0,"vmid":903,"clipboard":null,"uptime":0,"name":"windows-server-2025-2025-11-17T19-55-23Z-00000000","maxmem":4294967296,"mem":0,"cpus":2,"netin":0,"template":1,"maxdisk":32212254720,"netout":0,"ha":{"managed":0},"qmpstatus":"stopped","disk":0}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/903/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"running":0,"digest":"c13fd275a782dd7c8da17e79fe99f02377ea036d","description":"You
+        are here!","name":"current"}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/904/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"net0":"virtio=56:82:C8:A9:45:5A,bridge=vmbr1","cpu":"host","vga":"memory=16,type=std","ostype":"win10","machine":"pc-q35-10.1","cores":2,"agent":"1","scsi0":"local-lvm:base-904-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=30G,ssd=1","kvm":1,"efidisk0":"local-lvm:base-904-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","tpmstate0":"local-lvm:base-904-disk-2,size=4M,version=v2.0","name":"windows-server-2019-2025-11-17T19-55-23Z-00000000","sockets":1,"digest":"2776da2021e5ab8628b8087b88767572c60590c5","description":"Build
+        date: 2025-11-17T19:55:23Z","meta":"creation-qemu=10.1.2,ctime=1763409504","boot":"order=scsi0","template":1,"bios":"ovmf","scsihw":"virtio-scsi-single","numa":0,"memory":"4096","vmgenid":"a1d4c050-213d-406d-9a07-37135a1e284e","smbios1":"uuid=c50ed46d-3b09-4477-b83e-799de22becf1","onboot":0}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/904/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"uptime":0,"clipboard":null,"mem":0,"maxmem":4294967296,"name":"windows-server-2019-2025-11-17T19-55-23Z-00000000","vmid":904,"cpu":0,"status":"stopped","memhost":0,"agent":1,"ha":{"managed":0},"qmpstatus":"stopped","disk":0,"netout":0,"maxdisk":32212254720,"cpus":2,"template":1,"netin":0}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/904/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"digest":"2776da2021e5ab8628b8087b88767572c60590c5","running":0,"name":"current","description":"You
+        are here!"}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/905/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"tpmstate0":"local-lvm:base-905-disk-2,size=4M,version=v2.0","efidisk0":"local-lvm:base-905-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","kvm":1,"scsi0":"local-lvm:base-905-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=30G,ssd=1","agent":"1","cores":2,"machine":"pc-q35-10.1","digest":"0c08d73b93da94b641f9ca11c8306278b516e6d2","description":"Build
+        date: 2025-11-17T19:55:23Z","sockets":1,"name":"windows-server-2016-2025-11-17T19-55-23Z-00000000","cpu":"host","net0":"virtio=0A:18:04:E2:2E:F5,bridge=vmbr1","ostype":"win10","vga":"type=std,memory=16","vmgenid":"31355671-592d-4916-85cc-dcfbf3c825b3","memory":"4096","numa":0,"scsihw":"virtio-scsi-single","bios":"ovmf","onboot":0,"smbios1":"uuid=194e7033-1e8b-41f1-8b63-b5d556b19e7e","boot":"order=scsi0","template":1,"meta":"creation-qemu=10.1.2,ctime=1763409506"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/905/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"netout":0,"ha":{"managed":0},"qmpstatus":"stopped","disk":0,"cpus":2,"template":1,"netin":0,"maxdisk":32212254720,"clipboard":null,"uptime":0,"mem":0,"name":"windows-server-2016-2025-11-17T19-55-23Z-00000000","maxmem":4294967296,"memhost":0,"agent":1,"vmid":905,"status":"stopped","cpu":0}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/905/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"digest":"0c08d73b93da94b641f9ca11c8306278b516e6d2","running":0,"name":"current","description":"You
+        are here!"}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/906/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"agent":"1","machine":"pc-q35-10.1","cores":2,"tpmstate0":"local-lvm:base-906-disk-2,size=4M,version=v2.0","efidisk0":"local-lvm:base-906-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","kvm":1,"scsi0":"local-lvm:base-906-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=30G,ssd=1","name":"windows-11-23h2-2025-11-17T19-55-23Z-00000000","digest":"7b1e90ca9878fac18510170bbe4a4f940b262b49","description":"Build
+        date: 2025-11-17T19:55:23Z","sockets":1,"net0":"virtio=6A:FE:7F:D4:14:1F,bridge=vmbr1","cpu":"host","vga":"type=std,memory=16","ostype":"win10","numa":0,"scsihw":"virtio-scsi-single","bios":"ovmf","vmgenid":"34de4cef-650e-4dd7-9b40-56d84c33e2a1","memory":"4096","smbios1":"uuid=61515c1c-7e73-4521-8ff9-2b7ac78f9401","onboot":0,"meta":"creation-qemu=10.1.2,ctime=1763415174","template":1,"boot":"order=scsi0"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/906/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"clipboard":null,"uptime":0,"maxmem":4294967296,"name":"windows-11-23h2-2025-11-17T19-55-23Z-00000000","mem":0,"cpu":0,"status":"stopped","vmid":906,"memhost":0,"agent":1,"ha":{"managed":0},"qmpstatus":"stopped","disk":0,"netout":0,"maxdisk":32212254720,"cpus":2,"netin":0,"template":1}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/906/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"description":"You are here!","name":"current","running":0,"digest":"7b1e90ca9878fac18510170bbe4a4f940b262b49"}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/907/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"cpu":"host","net0":"virtio=5E:C2:E9:54:A6:74,bridge=vmbr1","ostype":"win10","vga":"type=std,memory=16","efidisk0":"local-lvm:base-907-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","scsi0":"local-lvm:base-907-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=30G,ssd=1","kvm":1,"tpmstate0":"local-lvm:base-907-disk-2,size=4M,version=v2.0","cores":2,"machine":"pc-q35-10.1","agent":"1","sockets":1,"description":"Build
+        date: 2025-11-17T19:55:23Z","digest":"8430f69b21003d438267db3008676d4f6088f775","name":"windows-10-ltsc-2019-2025-11-17T19-55-23Z-00000000","template":1,"boot":"order=scsi0","meta":"creation-qemu=10.1.2,ctime=1763413368","memory":"4096","vmgenid":"3964a777-d2bf-4d1a-b8d8-dfe5d7aef38a","bios":"ovmf","numa":0,"scsihw":"virtio-scsi-single","onboot":0,"smbios1":"uuid=a47456f1-5d14-4c7c-804c-9db0b8a41b0d"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/907/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"vmid":907,"status":"stopped","cpu":0,"agent":1,"memhost":0,"mem":0,"maxmem":4294967296,"name":"windows-10-ltsc-2019-2025-11-17T19-55-23Z-00000000","uptime":0,"clipboard":null,"maxdisk":32212254720,"template":1,"netin":0,"cpus":2,"disk":0,"qmpstatus":"stopped","ha":{"managed":0},"netout":0}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/907/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"digest":"8430f69b21003d438267db3008676d4f6088f775","running":0,"name":"current","description":"You
+        are here!"}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/908/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"memory":"4096","vmgenid":"1dd985a3-ff86-4c3f-8c8b-e17b3e84e944","bios":"ovmf","numa":0,"scsihw":"virtio-scsi-single","onboot":0,"smbios1":"uuid=2dcab05d-7dfd-4c47-abe6-812e742b3fc5","template":1,"boot":"order=scsi0","meta":"creation-qemu=10.1.2,ctime=1763414129","efidisk0":"local-lvm:base-908-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","scsi0":"local-lvm:base-908-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=30G,ssd=1","kvm":1,"tpmstate0":"local-lvm:base-908-disk-2,size=4M,version=v2.0","machine":"pc-q35-10.1","cores":2,"agent":"1","sockets":1,"description":"Build
+        date: 2025-11-17T19:55:23Z","digest":"7f27fb2a46d1565090cba2d24ebde24ae4e261a5","name":"windows-10-iot-ltsc-2021-2025-11-17T19-55-23Z-00000000","cpu":"host","net0":"virtio=F6:9B:D7:7C:E4:1C,bridge=vmbr1","ostype":"win10","vga":"type=std,memory=16"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/908/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"memhost":0,"agent":1,"status":"stopped","cpu":0,"vmid":908,"name":"windows-10-iot-ltsc-2021-2025-11-17T19-55-23Z-00000000","maxmem":4294967296,"mem":0,"uptime":0,"clipboard":null,"netin":0,"template":1,"cpus":2,"maxdisk":32212254720,"netout":0,"disk":0,"ha":{"managed":0},"qmpstatus":"stopped"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/908/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"digest":"7f27fb2a46d1565090cba2d24ebde24ae4e261a5","running":0,"name":"current","description":"You
+        are here!"}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/909/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"meta":"creation-qemu=10.1.2,ctime=1763416932","template":1,"boot":"order=scsi0","bios":"ovmf","scsihw":"virtio-scsi-single","numa":0,"memory":"4096","vmgenid":"5e99b237-ff40-41a6-a493-4a8f8236ab9d","smbios1":"uuid=42eead80-4491-4e83-ace9-eb8e1e3a97b3","onboot":0,"net0":"virtio=2A:CC:2C:B2:B2:AC,bridge=vmbr1","cpu":"host","vga":"type=std,memory=16","ostype":"win11","cores":2,"machine":"pc-q35-10.1","agent":"1","scsi0":"local-lvm:base-909-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=30G,ssd=1","kvm":1,"efidisk0":"local-lvm:base-909-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","tpmstate0":"local-lvm:base-909-disk-2,size=4M,version=v2.0","name":"windows-11-24h2-2025-11-17T19-55-23Z-00000000","sockets":1,"digest":"cadab27a353fef2dd432e7d68d384f1e049668ec","description":"Build
+        date: 2025-11-17T19:55:23Z"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/909/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"mem":0,"maxmem":4294967296,"name":"windows-11-24h2-2025-11-17T19-55-23Z-00000000","clipboard":null,"uptime":0,"vmid":909,"status":"stopped","cpu":0,"memhost":0,"agent":1,"disk":0,"qmpstatus":"stopped","ha":{"managed":0},"netout":0,"maxdisk":32212254720,"template":1,"netin":0,"cpus":2}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/909/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"name":"current","description":"You are here!","digest":"cadab27a353fef2dd432e7d68d384f1e049668ec","running":0}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/910/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"smbios1":"uuid=1879e47e-4dbe-4b9f-896c-27e882e966c0","onboot":0,"scsihw":"virtio-scsi-single","numa":0,"bios":"ovmf","vmgenid":"371a349c-b560-45ad-a7a5-939db0bffd62","memory":"4096","meta":"creation-qemu=10.1.2,ctime=1763417929","boot":"order=scsi0","template":1,"name":"windows-11-25h2-2025-11-17T19-55-23Z-00000000","digest":"338ffe03650a341bc7c3b327571e58c7075dae95","description":"Build
+        date: 2025-11-17T19:55:23Z","sockets":1,"agent":"1","cores":2,"machine":"pc-q35-10.1","tpmstate0":"local-lvm:base-910-disk-2,size=4M,version=v2.0","scsi0":"local-lvm:base-910-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=30G,ssd=1","kvm":1,"efidisk0":"local-lvm:base-910-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","vga":"type=std,memory=16","ostype":"win11","net0":"virtio=B2:C5:8D:43:0D:20,bridge=vmbr1","cpu":"host"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/910/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"memhost":0,"agent":1,"cpu":0,"status":"stopped","vmid":910,"clipboard":null,"uptime":0,"maxmem":4294967296,"name":"windows-11-25h2-2025-11-17T19-55-23Z-00000000","mem":0,"cpus":2,"netin":0,"template":1,"maxdisk":32212254720,"netout":0,"ha":{"managed":0},"qmpstatus":"stopped","disk":0}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/910/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"name":"current","description":"You are here!","digest":"338ffe03650a341bc7c3b327571e58c7075dae95","running":0}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/911/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"meta":"creation-qemu=10.1.2,ctime=1763417994","template":1,"boot":"order=scsi0","smbios1":"uuid=f0998c27-9e68-4a58-9e76-7c574d39687d","onboot":0,"scsihw":"virtio-scsi-single","numa":0,"bios":"ovmf","vmgenid":"c6ec2a60-4477-446d-8b59-92812c97b1b0","memory":"4096","vga":"memory=16,type=std","ostype":"win10","net0":"virtio=3A:8B:E3:A1:AD:35,bridge=vmbr1","cpu":"host","name":"windows-11-iot-ltsc-2024-2025-11-17T19-55-23Z-00000000","description":"Build
+        date: 2025-11-17T19:55:23Z","digest":"ae9a8b317646f9599c5cee202fa7404032369368","sockets":1,"agent":"1","cores":2,"machine":"pc-q35-10.1","tpmstate0":"local-lvm:base-911-disk-2,size=4M,version=v2.0","scsi0":"local-lvm:base-911-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=30G,ssd=1","kvm":1,"efidisk0":"local-lvm:base-911-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/911/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"cpus":2,"netin":0,"template":1,"maxdisk":32212254720,"netout":0,"qmpstatus":"stopped","ha":{"managed":0},"disk":0,"agent":1,"memhost":0,"status":"stopped","cpu":0,"vmid":911,"clipboard":null,"uptime":0,"name":"windows-11-iot-ltsc-2024-2025-11-17T19-55-23Z-00000000","maxmem":4294967296,"mem":0}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/911/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"running":0,"digest":"ae9a8b317646f9599c5cee202fa7404032369368","description":"You
+        are here!","name":"current"}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/912/config
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"scsi0":"local-lvm:base-912-disk-1,cache=none,discard=on,iothread=1,replicate=0,size=30G,ssd=1","kvm":1,"efidisk0":"local-lvm:base-912-disk-0,efitype=4m,ms-cert=2023,pre-enrolled-keys=1,size=4M","tpmstate0":"local-lvm:base-912-disk-2,size=4M,version=v2.0","cores":2,"machine":"pc-q35-10.1","agent":"1","sockets":1,"description":"Build
+        date: 2025-11-18T10:42:30Z","digest":"b40896bc8b1e512fd36b6f3a59badb630018b947","name":"windows-10-ltsb-2016-2025-11-18T10-42-30Z-00000000","cpu":"host","net0":"virtio=AA:C3:D2:16:04:4D,bridge=vmbr1","ostype":"win10","vga":"type=std,memory=16","memory":"4096","vmgenid":"f8050c41-be43-4194-be92-88dd382ddf91","bios":"ovmf","scsihw":"virtio-scsi-single","numa":0,"onboot":0,"smbios1":"uuid=63a919e4-e265-46ee-ac24-35223f5e02b9","boot":"order=scsi0","template":1,"meta":"creation-qemu=10.1.2,ctime=1763462589"}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/912/status/current
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":{"maxdisk":32212254720,"template":1,"netin":0,"cpus":2,"disk":0,"qmpstatus":"stopped","ha":{"managed":0},"netout":0,"vmid":912,"status":"stopped","cpu":0,"agent":1,"memhost":0,"mem":0,"maxmem":4294967296,"name":"windows-10-ltsb-2016-2025-11-18T10-42-30Z-00000000","uptime":0,"clipboard":null}}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
+- request:
+    method: get
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest/qemu/912/snapshot
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v2.14.1
+      Cookie:
+      - PVEAuthCookie=PVE_AUTH_COOKIE
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - max-age=0
+      Connection:
+      - Keep-Alive
+      - close
+      Date:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - pve-api-daemon/3.0
+      Content-Type:
+      - application/json;charset=UTF-8
+      Expires:
+      - Tue, 03 Mar 2026 15:46:34 GMT
+    body:
+      encoding: UTF-8
+      string: '{"data":[{"name":"current","description":"You are here!","digest":"b40896bc8b1e512fd36b6f3a59badb630018b947","running":0}]}'
+  recorded_at: Tue, 03 Mar 2026 15:46:34 GMT
 recorded_with: VCR 6.4.0

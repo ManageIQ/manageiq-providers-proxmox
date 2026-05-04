@@ -1,6 +1,12 @@
 class ManageIQ::Providers::Proxmox::InfraManager < ManageIQ::Providers::InfraManager
+  supports :catalog
   supports :create
   supports :refresh_ems
+  supports :provisioning
+
+  def self.catalog_types
+    {"proxmox" => N_("Proxmox VE")}
+  end
 
   def self.ems_type
     @ems_type ||= "proxmox".freeze
