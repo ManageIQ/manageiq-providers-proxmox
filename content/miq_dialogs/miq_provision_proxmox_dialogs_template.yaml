@@ -1,0 +1,245 @@
+---
+:name: miq_provision_proxmox_dialogs_template
+:description: Sample Proxmox Template Provisioning Dialog
+:dialog_type: MiqProvisionWorkflow
+:content:
+  :buttons:
+  - :submit
+  - :cancel
+  :dialogs:
+    :requester:
+      :description: Request
+      :fields:
+        :owner_first_name:
+          :description: First Name
+          :required: false
+          :display: :edit
+          :data_type: :string
+        :owner_last_name:
+          :description: Last Name
+          :required: false
+          :display: :edit
+          :data_type: :string
+        :owner_email:
+          :description: E-Mail
+          :required_method: :validate_regex
+          :required_regex: !ruby/regexp /\A[\w!#$\%&'*+\/=?`\{|\}~^-]+(?:\.[\w!#$\%&'*+\/=?`\{|\}~^-]+)*@(?:[A-Z0-9-]+\.)+[A-Z]{2,6}\Z/i
+          :required: false
+          :display: :edit
+          :data_type: :string
+        :request_notes:
+          :description: Notes
+          :required: false
+          :display: :edit
+          :data_type: :string
+      :display: :show
+      :field_order:
+    :service:
+      :description: Catalog
+      :fields:
+        :src_vm_id:
+          :values_from:
+            :options:
+              :tag_filters: []
+            :method: :allowed_templates
+          :description: Name
+          :required: true
+          :notes:
+          :display: :edit
+          :data_type: :integer
+          :notes_display: :show
+        :number_of_vms:
+          :values_from:
+            :options:
+              :max: 50
+            :method: :allowed_number_of_vms
+          :description: Count
+          :required: false
+          :display: :edit
+          :default: 1
+          :data_type: :integer
+        :vm_name:
+          :description: VM Name
+          :required_method: :validate_vm_name
+          :required: true
+          :display: :edit
+          :data_type: :string
+        :vm_description:
+          :description: VM Description
+          :required: false
+          :display: :edit
+          :data_type: :string
+        :linked_clone:
+          :values:
+            false: 0
+            true: 1
+          :description: Linked Clone
+          :required: false
+          :display: :edit
+          :default: false
+          :data_type: :boolean
+      :display: :show
+      :field_order:
+    :environment:
+      :description: Environment
+      :fields:
+        :placement_auto:
+          :values:
+            false: 0
+            true: 1
+          :description: Choose Automatically
+          :required: false
+          :display: :edit
+          :default: true
+          :data_type: :boolean
+        :placement_host_name:
+          :values_from:
+            :method: :allowed_hosts
+          :auto_select_single: false
+          :description: Host
+          :required: false
+          :display: :edit
+          :data_type: :integer
+        :placement_ds_name:
+          :values_from:
+            :method: :allowed_storages
+          :auto_select_single: false
+          :description: Datastore
+          :required: false
+          :display: :edit
+          :data_type: :integer
+      :display: :show
+      :field_order:
+    :network:
+      :description: Network
+      :fields:
+        :vlan:
+          :values_from:
+            :options:
+              :vlans: true
+            :method: :allowed_vlans
+          :description: Bridge
+          :required: false
+          :display: :edit
+          :data_type: :string
+      :display: :show
+      :field_order:
+    :hardware:
+      :description: Hardware
+      :fields:
+        :allocated_disk_storage:
+          :description: Disk Size (GB)
+          :required: false
+          :display: :edit
+          :data_type: :integer
+        :disk_format:
+          :values_from:
+            :method: :allowed_disk_formats
+          :auto_select_single: false
+          :description: Disk Format
+          :required: false
+          :display: :hide
+          :data_type: :string
+        :number_of_sockets:
+          :values:
+            1: '1'
+            2: '2'
+            4: '4'
+            8: '8'
+          :description: Number of Sockets
+          :required: false
+          :display: :edit
+          :default: 1
+          :data_type: :integer
+        :cores_per_socket:
+          :values:
+            1: '1'
+            2: '2'
+            4: '4'
+            8: '8'
+          :description: Cores per Socket
+          :required: false
+          :display: :edit
+          :default: 1
+          :data_type: :integer
+        :vm_memory:
+          :values:
+            '1024': '1024'
+            '2048': '2048'
+            '4096': '4096'
+            '8192': '8192'
+            '16384': '16384'
+            '32768': '32768'
+          :description: Memory (MB)
+          :required: false
+          :display: :edit
+          :default: '2048'
+          :data_type: :string
+        :renew_tpm:
+          :values:
+            false: 0
+            true: 1
+          :description: Renew TPM State on Clone
+          :required: false
+          :display: :edit
+          :default: true
+          :data_type: :boolean
+        :extra_config:
+          :description: Extra Config (JSON)
+          :required: false
+          :display: :edit
+          :data_type: :string
+          :notes: 'JSON object of Proxmox VM config keys, e.g. {"tags":"prod","onboot":1}. Dialog fields take precedence.'
+          :notes_display: :show
+      :display: :show
+      :field_order:
+    :schedule:
+      :description: Schedule
+      :fields:
+        :schedule_type:
+          :values:
+            schedule: Schedule
+            immediately: Immediately on Approval
+          :description: When to Provision
+          :required: false
+          :display: :edit
+          :default: immediately
+          :data_type: :string
+        :vm_auto_start:
+          :values:
+            false: 0
+            true: 1
+          :description: Power on virtual machines after creation
+          :required: false
+          :display: :edit
+          :default: false
+          :data_type: :boolean
+        :schedule_time:
+          :values_from:
+            :options:
+              :offset: 1.day
+            :method: :default_schedule_time
+          :description: Provision on
+          :required: false
+          :display: :edit
+          :data_type: :time
+        :retirement:
+          :values:
+            0: Indefinite
+            1.month: 1 Month
+            3.months: 3 Months
+            6.months: 6 Months
+          :description: Time until Retirement
+          :required: false
+          :display: :edit
+          :default: 0
+          :data_type: :integer
+      :display: :show
+      :field_order:
+  :dialog_order:
+  - :requester
+  - :service
+  - :environment
+  - :hardware
+  - :network
+  - :schedule

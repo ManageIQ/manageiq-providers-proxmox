@@ -3,6 +3,11 @@ class ManageIQ::Providers::Proxmox::Inventory::Persister::InfraManager < ManageI
     add_collection(infra, :clusters)
     add_collection(infra, :hosts)
     add_collection(infra, :host_hardwares)
+    add_collection(infra, :host_operating_systems)
+    add_collection(infra, :host_guest_devices)
+    add_collection(infra, :host_virtual_switches)
+    add_collection(infra, :host_virtual_lans)
+    add_collection(infra, :host_switches)
     add_collection(infra, :storages)
     add_collection(infra, :host_storages)
     add_collection(infra, :disks, :parent_inventory_collections => %i[vms_and_templates])
@@ -19,6 +24,10 @@ class ManageIQ::Providers::Proxmox::Inventory::Persister::InfraManager < ManageI
       # Additionally Proxmox reuses VM IDs so a new VM will get the same ID
       # as a previously deleted VM which would then be reconnected.
       builder.add_properties(:custom_reconnect_block => nil)
+      # In targeted mode, set manager_uuids so the persister knows which VMs
+      # were expected. Any VM in this set that wasn't built by the parser
+      # will be archived (removed from VMDB) — this handles VM deletions.
+      builder.add_properties(:manager_uuids => references(:vms)) if targeted?
     end
   end
 end
