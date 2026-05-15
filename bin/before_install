@@ -22,7 +22,3 @@ fi
 if [ -n "$CI" ]; then
   $spec_manageiq/bin/ci/setup_plugin_gemfile_lock
 fi
-
-if [ -n "$CI" ]; then
-  $spec_manageiq/bin/ci/setup_plugin_gemfile_lock
-fi
