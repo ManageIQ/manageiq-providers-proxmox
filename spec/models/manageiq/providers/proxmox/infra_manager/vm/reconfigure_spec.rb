@@ -254,6 +254,55 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure do
       result = vm.send(:encode_nic, {})
       expect(URI.decode_www_form_component(result)).to eq("virtio,bridge=vmbr0")
     end
+
+    it "appends vlan tag when vlan_tag is provided" do
+      result = vm.send(:encode_nic, {'network' => 'vmbr0', 'vlan_tag' => '100'})
+      expect(URI.decode_www_form_component(result)).to eq("virtio,bridge=vmbr0,tag=100")
+    end
+
+    it "appends vlan tag with MAC when both are provided" do
+      result = vm.send(:encode_nic, {:model => 'virtio', :bridge => 'vmbr0', :mac => 'BC:24:11:AA:BB:CC', :vlan_tag => '200'})
+      expect(URI.decode_www_form_component(result)).to eq("virtio=BC:24:11:AA:BB:CC,bridge=vmbr0,tag=200")
+    end
+
+    it "omits tag when vlan_tag is blank" do
+      result = vm.send(:encode_nic, {'network' => 'vmbr0', 'vlan_tag' => ''})
+      expect(URI.decode_www_form_component(result)).not_to include("tag=")
+    end
+
+    it "accepts an SDN vnet as bridge" do
+      result = vm.send(:encode_nic, {'network' => 'vnet-prod'})
+      expect(URI.decode_www_form_component(result)).to eq("virtio,bridge=vnet-prod")
+    end
+  end
+
+  describe "#available_nic_networks" do
+    before do
+      switch = FactoryBot.create(:switch, :host => host, :uid_ems => 'vmbr0', :name => 'vmbr0')
+      host.switches << switch
+      allow(vm).to receive(:sdn_vnets).and_return([
+                                                    {"vnet" => "vnet-prod", "alias" => "Production"},
+                                                    {"vnet" => "vnet-mgmt", "alias" => nil}
+                                                  ])
+    end
+
+    it "returns bridges from the host" do
+      networks = vm.available_nic_networks
+      bridge = networks.find { |n| n[:type] == :bridge }
+      expect(bridge).to include(:id => 'vmbr0', :name => 'vmbr0', :type => :bridge)
+    end
+
+    it "returns SDN vnets with alias in name" do
+      networks = vm.available_nic_networks
+      vnet = networks.find { |n| n[:id] == 'vnet-prod' }
+      expect(vnet).to include(:name => 'vnet-prod (Production)', :type => :sdn)
+    end
+
+    it "returns SDN vnets without alias when alias is nil" do
+      networks = vm.available_nic_networks
+      vnet = networks.find { |n| n[:id] == 'vnet-mgmt' }
+      expect(vnet).to include(:name => 'vnet-mgmt', :type => :sdn)
+    end
   end
 
   describe "#next_slot" do

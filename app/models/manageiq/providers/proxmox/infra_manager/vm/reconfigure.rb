@@ -28,6 +28,12 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure
   def scsi_controller_types    = %w[scsi virtio sata ide]
   def scsi_controller_default_type = 'scsi'
 
+  def available_nic_networks
+    bridges = host&.switches&.map { |s| {:id => s.uid_ems, :name => s.name, :type => :bridge} } || []
+    vnets   = sdn_vnets.map { |v| {:id => v["vnet"], :name => "#{v["vnet"]}#{" (#{v["alias"]})" if v["alias"].present?}", :type => :sdn} }
+    bridges + vnets
+  end
+
   def build_config_spec(options)
     cores   = options[:cores_per_socket]&.to_i
     cpus    = options[:number_of_cpus]&.to_i
@@ -190,15 +196,27 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure
   end
 
   def encode_nic(spec)
-    model  = spec['network_adapter_type'] || spec[:model] || 'virtio'
-    bridge = spec['network'] || spec['cloud_network'] || spec[:bridge] || 'vmbr0'
-    mac    = spec['mac_address'] || spec[:mac]
+    model    = spec['network_adapter_type'] || spec[:model]    || 'virtio'
+    bridge   = spec['network'] || spec['cloud_network'] || spec[:bridge] || 'vmbr0'
+    mac      = spec['mac_address'] || spec[:mac]
+    vlan_tag = spec['vlan_tag']   || spec[:vlan_tag]
 
-    value = mac.present? ? "#{model}=#{mac},bridge=#{bridge}" : "#{model},bridge=#{bridge}"
-    URI.encode_www_form_component(value)
+    parts = mac.present? ? ["#{model}=#{mac}", "bridge=#{bridge}"] : ["#{model}", "bridge=#{bridge}"]
+    parts << "tag=#{vlan_tag}" if vlan_tag.present?
+
+    URI.encode_www_form_component(parts.join(","))
   end
 
   # Proxmox API
+
+  def sdn_vnets
+    with_provider_connection do |connection|
+      connection.request(:get, "/cluster/sdn/vnets")
+    end
+  rescue => e
+    _log.warn("Failed to fetch SDN vnets: #{e.message}")
+    []
+  end
 
   def fetch_config(connection)
     connection.request(:get, "#{vm_path}/config")
