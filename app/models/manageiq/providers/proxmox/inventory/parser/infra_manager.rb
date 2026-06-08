@@ -446,7 +446,7 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
       persister.host_virtual_lans.build(
         :switch  => switch,
         :uid_ems => uid,
-        :name    => uid,
+        :name    => label,
         :tag     => ""
       )
     end

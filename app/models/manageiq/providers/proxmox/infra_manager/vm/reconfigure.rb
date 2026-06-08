@@ -29,8 +29,11 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure
   def scsi_controller_default_type = 'scsi'
 
   def available_nic_networks
-    bridges = host&.switches&.map { |s| {:id => s.uid_ems, :name => s.name, :type => :bridge} } || []
-    vnets   = sdn_vnets.map { |v| {:id => v["vnet"], :name => "#{v["vnet"]}#{" (#{v["alias"]})" if v["alias"].present?}", :type => :sdn} }
+    bridges = host&.switches&.flat_map(&:lans)&.map { |l| {:id => l.uid_ems, :name => l.name, :type => :bridge} } || []
+    vnets   = sdn_vnets.map do |v|
+      label = v["alias"].present? ? "#{v["vnet"]} (#{v["alias"]})" : v["vnet"]
+      {:id => v["vnet"], :name => label, :type => :sdn}
+    end
     bridges + vnets
   end
 
@@ -197,9 +200,10 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure
 
   def encode_nic(spec)
     model    = spec['network_adapter_type'] || spec[:model]    || 'virtio'
-    bridge   = spec['network'] || spec['cloud_network'] || spec[:bridge] || 'vmbr0'
+    raw      = spec['network'] || spec['cloud_network'] || spec[:bridge] || 'vmbr0'
+    bridge   = resolve_bridge_id(raw)
     mac      = spec['mac_address'] || spec[:mac]
-    vlan_tag = spec['vlan_tag']   || spec[:vlan_tag]
+    vlan_tag = spec['vlan_tag']    || spec[:vlan_tag]
 
     parts = mac.present? ? ["#{model}=#{mac}", "bridge=#{bridge}"] : ["#{model}", "bridge=#{bridge}"]
     parts << "tag=#{vlan_tag}" if vlan_tag.present?
@@ -208,6 +212,16 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure
   end
 
   # Proxmox API
+
+  def resolve_bridge_id(name)
+    lan = host&.switches&.flat_map(&:lans)&.find { |l| l.name == name || l.uid_ems == name }
+    lan&.uid_ems || name
+  end
+
+  def resolve_bridge_id(name)
+    lan = host&.switches&.flat_map(&:lans)&.find { |l| l.name == name || l.uid_ems == name }
+    lan&.uid_ems || name
+  end
 
   def sdn_vnets
     with_provider_connection do |connection|
