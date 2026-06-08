@@ -64,9 +64,7 @@ class ManageIQ::Providers::Proxmox::InfraManager::ProvisionWorkflow < ManageIQ::
 
     ems = load_ar_obj(src[:ems])
 
-    bridges = ems.hosts.flat_map(&:switches).uniq(&:uid_ems).each_with_object({}) do |sw, h|
-      h[sw.uid_ems] = sw.name
-    end
+    bridges = ems.hosts.flat_map(&:switches).uniq(&:uid_ems).to_h { |sw| [sw.uid_ems, sw.name] }
 
     vnets = begin
       ems.with_provider_connection do |conn|
