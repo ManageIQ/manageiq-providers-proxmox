@@ -218,11 +218,6 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure
     lan&.uid_ems || name
   end
 
-  def resolve_bridge_id(name)
-    lan = host&.switches&.flat_map(&:lans)&.find { |l| l.name == name || l.uid_ems == name }
-    lan&.uid_ems || name
-  end
-
   def sdn_vnets
     with_provider_connection do |connection|
       connection.request(:get, "/cluster/sdn/vnets")
