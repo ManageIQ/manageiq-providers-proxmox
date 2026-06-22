@@ -26,4 +26,13 @@ class ManageIQ::Providers::Proxmox::Inventory::Collector::InfraManager < ManageI
   def networks
     @networks ||= cluster_resources_by_type["network"]
   end
+
+  def sdn_vnets
+    @sdn_vnets ||= begin
+      connection.request(:get, "/cluster/sdn/vnets")
+    rescue => e
+      _log.warn("Failed to fetch SDN vnets: #{e.message}")
+      []
+    end
+  end
 end

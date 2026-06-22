@@ -48,6 +48,7 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
       parse_host_operating_system(host_obj)
       parse_host_network_adapters(hardware, details[:networks])
       parse_host_switches(host_obj, hardware, details[:networks])
+      parse_sdn_vnets(host_obj)
     end
   end
 
@@ -426,6 +427,28 @@ class ManageIQ::Providers::Proxmox::Inventory::Parser::InfraManager < ManageIQ::
     bridge_ports.to_s.split.each do |pnic_name|
       pnic = persister.host_guest_devices.find_or_build_by(:hardware => hardware, :uid_ems => pnic_name)
       pnic.assign_attributes(:switch => switch)
+    end
+  end
+
+  def parse_sdn_vnets(host_obj)
+    collector.sdn_vnets.each do |vnet|
+      uid   = vnet["vnet"]
+      label = vnet["alias"].present? ? "#{uid} (#{vnet["alias"]})" : uid
+
+      switch = persister.host_virtual_switches.build(
+        :host    => host_obj,
+        :uid_ems => uid,
+        :name    => label
+      )
+
+      persister.host_switches.build(:host => host_obj, :switch => switch)
+
+      persister.host_virtual_lans.build(
+        :switch  => switch,
+        :uid_ems => uid,
+        :name    => label,
+        :tag     => ""
+      )
     end
   end
 end

@@ -58,6 +58,29 @@ class ManageIQ::Providers::Proxmox::InfraManager::ProvisionWorkflow < ManageIQ::
     }
   end
 
+  def allowed_vlans(_options = {})
+    src = get_source_and_targets
+    return {} if src.blank? || src[:ems].nil?
+
+    ems = load_ar_obj(src[:ems])
+
+    bridges = ems.hosts.flat_map(&:switches).uniq(&:uid_ems).to_h { |sw| [sw.uid_ems, sw.name] }
+
+    vnets = begin
+      ems.with_provider_connection do |conn|
+        Array(conn.request(:get, "/cluster/sdn/vnets")).each_with_object({}) do |v, h|
+          label = v["alias"].present? ? "#{v["vnet"]} (#{v["alias"]})" : v["vnet"]
+          h[v["vnet"]] = label
+        end
+      end
+    rescue => e
+      _log.warn("Failed to fetch SDN vnets for allowed_vlans: #{e.message}")
+      {}
+    end
+
+    bridges.merge(vnets)
+  end
+
   def validate_vm_name(_field, values, _dlg, _fld, _value)
     vm_name = get_value(values[:vm_name])
     return _("VM Name is required") if vm_name.blank?
