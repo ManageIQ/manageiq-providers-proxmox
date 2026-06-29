@@ -48,7 +48,7 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Operations::Snapshot
       params = {:snapname => name}
       params[:description] = desc if desc.present?
       params[:vmstate] = 1 if memory && current_state == 'on'
-      run_task(:post, "snapshot?#{URI.encode_www_form(params)}")
+      run_task(:post, "snapshot", params)
     end
   end
 
@@ -73,9 +73,9 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Operations::Snapshot
 
   private
 
-  def run_task(method, path)
+  def run_task(method, path, body = nil)
     with_provider_connection do |connection|
-      upid = connection.request(method, "#{vm_path}/#{path}")
+      upid = connection.request(method, "#{vm_path}/#{path}", {}, body)
       wait_for_task!(connection, upid)
     end
   end

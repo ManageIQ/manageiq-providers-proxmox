@@ -142,7 +142,7 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning do
 
     it "returns the UPID when Proxmox responds with one" do
       provision.options[:vm_memory] = 4096
-      allow(connection).to receive(:request).with(:put, anything).and_return("UPID:vmpvetest:001:config:OK")
+      allow(connection).to receive(:request).with(:put, any_args).and_return("UPID:vmpvetest:001:config:OK")
 
       result = provision.send(:apply_hardware_customization, connection, "vmpvetest", 101)
       expect(result).to eq("UPID:vmpvetest:001:config:OK")
@@ -150,7 +150,7 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning do
 
     it "returns nil when Proxmox responds without a UPID (sync task)" do
       provision.options[:vm_memory] = 4096
-      allow(connection).to receive(:request).with(:put, anything).and_return(nil)
+      allow(connection).to receive(:request).with(:put, any_args).and_return(nil)
 
       result = provision.send(:apply_hardware_customization, connection, "vmpvetest", 101)
       expect(result).to be_nil
@@ -163,10 +163,8 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning do
         :vm_memory         => 4096
       )
 
-      expect(connection).to receive(:request).with(:put, satisfy do |url|
-        url.include?("sockets=2") &&
-          url.include?("cores=4") &&
-          url.include?("memory=4096")
+      expect(connection).to receive(:request).with(:put, anything, {}, satisfy do |body|
+        body[:sockets] == 2 && body[:cores] == 4 && body[:memory] == 4096
       end).and_return(nil)
 
       provision.send(:apply_hardware_customization, connection, "vmpvetest", 101)
@@ -176,8 +174,8 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning do
       provision.options[:vlan] = "vmbr1"
       allow(connection).to receive(:request).with(:get, /config/).and_return("net0" => "virtio=BC:24:11:E2:9F:14,bridge=vmbr0")
 
-      expect(connection).to receive(:request).with(:put, satisfy do |url|
-        url =~ /net0=virtio.*vmbr1/
+      expect(connection).to receive(:request).with(:put, anything, {}, satisfy do |body|
+        body[:net0].to_s =~ /virtio.*vmbr1/
       end).and_return(nil)
 
       provision.send(:apply_hardware_customization, connection, "vmpvetest", 101)
@@ -190,8 +188,8 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning do
           :extra_config => '{"tags":"prod","onboot":1}'
         )
 
-        expect(connection).to receive(:request).with(:put, satisfy do |url|
-          url.include?("tags=prod") && url.include?("onboot=1") && url.include?("memory=2048")
+        expect(connection).to receive(:request).with(:put, anything, {}, satisfy do |body|
+          body[:tags] == "prod" && body[:onboot] == 1 && body[:memory] == 2048
         end).and_return(nil)
 
         provision.send(:apply_hardware_customization, connection, "vmpvetest", 101)
@@ -203,8 +201,8 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning do
           :extra_config => '{"memory":1024}'
         )
 
-        expect(connection).to receive(:request).with(:put, satisfy do |url|
-          url.include?("memory=4096") && url.exclude?("memory=1024")
+        expect(connection).to receive(:request).with(:put, anything, {}, satisfy do |body|
+          body[:memory] == 4096
         end).and_return(nil)
 
         provision.send(:apply_hardware_customization, connection, "vmpvetest", 101)
@@ -222,13 +220,13 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning do
     end
 
     it "returns nil when no disk size requested" do
-      expect(connection).not_to receive(:request).with(:put, anything)
+      expect(connection).not_to receive(:request).with(:put, any_args)
       expect(provision.send(:resize_boot_disk, connection, "vmpvetest", 101)).to be_nil
     end
 
     it "returns the UPID when Proxmox responds with one" do
       provision.options[:allocated_disk_storage] = 20
-      allow(connection).to receive(:request).with(:put, anything).and_return("UPID:vmpvetest:002:resize:OK")
+      allow(connection).to receive(:request).with(:put, any_args).and_return("UPID:vmpvetest:002:resize:OK")
 
       result = provision.send(:resize_boot_disk, connection, "vmpvetest", 101)
       expect(result).to eq("UPID:vmpvetest:002:resize:OK")
@@ -237,8 +235,8 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning do
     it "sends a resize when requested size is larger than current" do
       provision.options[:allocated_disk_storage] = 20
 
-      expect(connection).to receive(:request).with(:put, satisfy do |url|
-        url.include?("disk=scsi0") && url.include?("size=%2B10G")
+      expect(connection).to receive(:request).with(:put, anything, {}, satisfy do |body|
+        body[:disk] == "scsi0" && body[:size] == "+10G"
       end).and_return(nil)
 
       provision.send(:resize_boot_disk, connection, "vmpvetest", 101)
@@ -246,14 +244,14 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning do
 
     it "skips resize when requested size equals current size" do
       provision.options[:allocated_disk_storage] = 10
-      expect(connection).not_to receive(:request).with(:put, anything)
+      expect(connection).not_to receive(:request).with(:put, any_args)
       provision.send(:resize_boot_disk, connection, "vmpvetest", 101)
     end
 
     it "skips and warns when requested size is smaller than current" do
       provision.options[:allocated_disk_storage] = 5
       expect($proxmox_log).to receive(:warn).with(/smaller/)
-      expect(connection).not_to receive(:request).with(:put, anything)
+      expect(connection).not_to receive(:request).with(:put, any_args)
       provision.send(:resize_boot_disk, connection, "vmpvetest", 101)
     end
   end
@@ -319,12 +317,12 @@ describe ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning do
   describe "#start_clone" do
     before do
       allow(connection).to receive(:request).with(:get, "/cluster/nextid").and_return("101")
-      allow(connection).to receive(:request).with(:post, anything).and_return("UPID:vmpvetest:000A:clone:OK")
+      allow(connection).to receive(:request).with(:post, any_args).and_return("UPID:vmpvetest:000A:clone:OK")
     end
 
     it "posts a clone request and stores the new vmid in phase_context" do
-      expect(connection).to receive(:request).with(:post, satisfy do |url|
-        url.include?("/qemu/900/clone") && url.include?("newid=101") && url.include?("name=new-vm")
+      expect(connection).to receive(:request).with(:post, satisfy { |url| url.include?("/qemu/900/clone") }, {}, satisfy do |body|
+        body[:newid] == 101 && body[:name] == "new-vm"
       end).and_return("UPID:vmpvetest:000A:clone:OK")
 
       provision.start_clone(provision.prepare_for_clone_task)

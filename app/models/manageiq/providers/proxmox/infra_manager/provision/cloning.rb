@@ -33,7 +33,7 @@ module ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning
       new_vmid = connection.request(:get, "/cluster/nextid")
       params = build_clone_params(new_vmid, clone_opts, dest_node_id, src_node_id)
 
-      task_upid = connection.request(:post, "/nodes/#{src_node_id}/qemu/#{template_vmid}/clone?#{URI.encode_www_form(params)}")
+      task_upid = connection.request(:post, "/nodes/#{src_node_id}/qemu/#{template_vmid}/clone", {}, params)
 
       phase_context[:clone_task_upid] = task_upid
       phase_context[:new_vmid]        = new_vmid
@@ -119,7 +119,7 @@ module ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning
     return if params.empty?
 
     $proxmox_log.info("Applying hardware customization to VM #{new_vmid}: #{params}")
-    upid = connection.request(:put, "/nodes/#{node_id}/qemu/#{new_vmid}/config?#{URI.encode_www_form(params)}")
+    upid = connection.request(:put, "/nodes/#{node_id}/qemu/#{new_vmid}/config", {}, params)
     upid if upid.kind_of?(String) && upid.start_with?("UPID:")
   end
 
@@ -133,9 +133,9 @@ module ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning
 
     $proxmox_log.info("Re-keying TPM for VM #{new_vmid}: removing cloned state, provisioning fresh on #{target_storage} (#{version})")
 
-    connection.request(:put, "/nodes/#{node_id}/qemu/#{new_vmid}/unlink?#{URI.encode_www_form(:idlist => 'tpmstate0', :force => 1)}")
+    connection.request(:put, "/nodes/#{node_id}/qemu/#{new_vmid}/unlink", {}, {:idlist => 'tpmstate0', :force => 1})
 
-    upid = connection.request(:put, "/nodes/#{node_id}/qemu/#{new_vmid}/config?#{URI.encode_www_form(:tpmstate0 => "#{target_storage}:0,version=#{version}")}")
+    upid = connection.request(:put, "/nodes/#{node_id}/qemu/#{new_vmid}/config", {}, {:tpmstate0 => "#{target_storage}:0,version=#{version}"})
     upid if upid.kind_of?(String) && upid.start_with?("UPID:")
   end
 
@@ -155,7 +155,7 @@ module ManageIQ::Providers::Proxmox::InfraManager::Provision::Cloning
     if requested_gb > current_gb
       increase_gb = requested_gb - current_gb
       $proxmox_log.info("Resizing boot disk #{disk_slot} of VM #{new_vmid}: +#{increase_gb}G (#{current_gb}G -> #{requested_gb}G)")
-      upid = connection.request(:put, "/nodes/#{node_id}/qemu/#{new_vmid}/resize?#{URI.encode_www_form(:disk => disk_slot, :size => "+#{increase_gb}G")}")
+      upid = connection.request(:put, "/nodes/#{node_id}/qemu/#{new_vmid}/resize", {}, {:disk => disk_slot, :size => "+#{increase_gb}G"})
       upid if upid.kind_of?(String) && upid.start_with?("UPID:")
     elsif requested_gb < current_gb
       $proxmox_log.warn("Requested disk size #{requested_gb}G is smaller than current #{current_gb}G for VM #{new_vmid} — skipping resize (Proxmox does not support shrinking)")

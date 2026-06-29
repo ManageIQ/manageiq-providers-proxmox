@@ -90,7 +90,7 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure
     storage = spec['datastore'] || storages.first&.location || 'local-lvm'
     size_gb = spec['disk_size_in_mb'].to_i / 1024
 
-    execute_reconfigure_task(connection, :put, "config?#{slot}=#{build_disk_value(storage, size_gb, spec)}")
+    execute_reconfigure_task(connection, :put, "config", {slot => build_disk_value(storage, size_gb, spec)})
   end
 
   def build_disk_value(storage, size_gb, spec)
@@ -116,12 +116,12 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure
     return if new_mb <= current_mb
 
     increase_gb = ((new_mb - current_mb) / 1024.0).ceil
-    execute_reconfigure_task(connection, :put, "resize?disk=#{slot}&size=%2B#{increase_gb}G")
+    execute_reconfigure_task(connection, :put, "resize", {:disk => slot, :size => "+#{increase_gb}G"})
   end
 
   def remove_disk(connection, spec)
     slot = find_disk_slot(spec)
-    execute_reconfigure_task(connection, :put, "config?delete=#{slot}") if slot
+    execute_reconfigure_task(connection, :put, "config", {:delete => slot}) if slot
   end
 
   def find_disk_slot(spec)
@@ -145,7 +145,7 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure
   end
 
   def add_nic(connection, config, spec)
-    execute_reconfigure_task(connection, :put, "config?#{next_slot(config, 'net')}=#{encode_nic(spec)}")
+    execute_reconfigure_task(connection, :put, "config", {next_slot(config, 'net') => encode_nic(spec)})
   end
 
   def edit_nic(connection, config, spec)
@@ -158,12 +158,12 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure
       :bridge => spec['network'] || spec['cloud_network'] || current[:bridge],
       :mac    => spec['mac_address'] || current[:mac]
     }
-    execute_reconfigure_task(connection, :put, "config?#{slot}=#{encode_nic(merged)}")
+    execute_reconfigure_task(connection, :put, "config", {slot => encode_nic(merged)})
   end
 
   def remove_nic(connection, config, spec)
     slot = find_nic_slot(spec, config)
-    execute_reconfigure_task(connection, :put, "config?delete=#{slot}") if slot
+    execute_reconfigure_task(connection, :put, "config", {:delete => slot}) if slot
   end
 
   def find_nic_slot(spec, _config)
@@ -194,8 +194,7 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure
     bridge = spec['network'] || spec['cloud_network'] || spec[:bridge] || 'vmbr0'
     mac    = spec['mac_address'] || spec[:mac]
 
-    value = mac.present? ? "#{model}=#{mac},bridge=#{bridge}" : "#{model},bridge=#{bridge}"
-    URI.encode_www_form_component(value)
+    mac.present? ? "#{model}=#{mac},bridge=#{bridge}" : "#{model},bridge=#{bridge}"
   end
 
   # Proxmox API
@@ -205,12 +204,11 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Reconfigure
   end
 
   def apply_config(connection, spec)
-    params = spec.map { |k, v| "#{k}=#{v}" }.join("&")
-    execute_reconfigure_task(connection, :put, "config?#{params}")
+    execute_reconfigure_task(connection, :put, "config", spec)
   end
 
-  def execute_reconfigure_task(connection, method, path)
-    upid = connection.request(method, "#{vm_path}/#{path}")
+  def execute_reconfigure_task(connection, method, path, body = {})
+    upid = connection.request(method, "#{vm_path}/#{path}", {}, body)
     await_reconfigure_task(connection, upid)
   end
 
