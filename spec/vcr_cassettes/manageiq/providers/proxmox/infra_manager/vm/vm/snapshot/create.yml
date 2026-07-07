@@ -40,19 +40,21 @@ http_interactions:
   recorded_at: Thu, 19 Feb 2026 13:54:39 GMT
 - request:
     method: post
-    uri: https://proxmox:8006/api2/json/nodes/vmpvetest2/qemu/101/snapshot?description=Test%20snapshot&snapname=test_snap
+    uri: https://proxmox:8006/api2/json/nodes/vmpvetest2/qemu/101/snapshot
     body:
       encoding: UTF-8
-      string: ''
+      string: snapname=test_snap&description=Test+snapshot
     headers:
       User-Agent:
       - Faraday v2.14.0
+      Content-Type:
+      - application/x-www-form-urlencoded
       Cookie:
       - PVEAuthCookie=PVE_AUTH_COOKIE
       Csrfpreventiontoken:
       - 6997161D:uFJlPH8qOib2+oubM3/PyYR++Jme46muMieUbZ0LWws
       Content-Length:
-      - '0'
+      - '44'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
