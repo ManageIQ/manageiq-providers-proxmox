@@ -45,10 +45,10 @@ module ManageIQ::Providers::Proxmox::InfraManager::Vm::Operations::Snapshot
 
     $proxmox_log.info("Creating snapshot for VM #{self.name} with name=#{name}, desc=#{desc}, memory=#{memory}")
     with_snapshot_error_handling("create") do
-      params = {:snapname => name}
-      params[:description] = desc if desc.present?
-      params[:vmstate] = 1 if memory && current_state == 'on'
-      run_task(:post, "snapshot", params)
+      body = {:snapname => name}
+      body[:description] = desc if desc.present?
+      body[:vmstate] = 1 if memory && current_state == 'on'
+      run_task(:post, "snapshot", body)
     end
   end
 
