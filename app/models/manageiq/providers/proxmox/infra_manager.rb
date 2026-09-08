@@ -165,26 +165,31 @@ class ManageIQ::Providers::Proxmox::InfraManager < ManageIQ::Providers::InfraMan
     node_name, vmid = vm.location.split('/')
 
     with_provider_connection do |connection|
-      vnc_response = connection.request(:post, "/nodes/#{node_name}/qemu/#{vmid}/vncproxy")
-      cluster_status = connection.request(:get, "/cluster/status")
-      node_data = cluster_status&.find { |item| item["type"] == "node" && item["name"] == node_name }
+      vnc_response = connection.request(:post, "/nodes/#{node_name}/qemu/#{vmid}/vncproxy", {}, {:websocket => 0})
+
+      ticket    = vnc_response&.dig("ticket")
+      vnc_port  = vnc_response&.dig("port")
+
+      if ticket.blank? || vnc_port.blank?
+        raise MiqException::RemoteConsoleNotSupportedError,
+              "Proxmox did not return a valid VNC ticket/port for VM #{vmid} on node #{node_name}"
+      end
 
       SystemConsole.force_vm_invalid_token(vm.id)
       console_args = {
         :user       => User.find_by(:userid => userid),
         :vm_id      => vm.id,
         :protocol   => 'vnc',
-        :secret     => vnc_response["ticket"],
+        :secret     => ticket,
         :url_secret => SecureRandom.hex,
         :ssl        => false
       }
-      host_address = node_data&.dig("ip") || node_name
-      host_port = vnc_response["port"].to_i
 
-      SystemConsole.launch_proxy_if_not_local(console_args, originating_server, host_address, host_port)
+      SystemConsole.launch_proxy_if_not_local(console_args, originating_server, hostname, vnc_port.to_i)
     end
   rescue => err
-    _log.error("VNC ticket error: #{err.message}")
+    _log.error("VNC ticket error for VM #{vm.id} (node=#{node_name}, vmid=#{vmid}): #{err.message}")
+    _log.error(err.backtrace.join("\n"))
     raise MiqException::RemoteConsoleNotSupportedError, err.message
   end
 end
